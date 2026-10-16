@@ -2,7 +2,7 @@
 
 CRM 0.4.1 provides typed records, relations, imports, search, and schema editing. A fresh CRM has an empty schema: it does not supply a company, contact, or opportunity schema by itself.
 
-The screenshots show a fictional project schema configured for a demonstration workspace.
+The screenshots show a fictional sales schema with companies, people, and deals configured for a demonstration workspace.
 
 ## Configure records
 
