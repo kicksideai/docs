@@ -30,6 +30,6 @@ Context updates use `SET_CONTEXT` or `PATCH_CONTEXT`. An `expected_revision` mak
 
 `component.ACCESS` uses READ=1, WRITE=2, DELETE=4, ADMIN=8, READ_WRITE=3, and FULL=15. Creation grants the creator FULL access. Sharing requires ADMIN and cascades through the subtree; child creation requires WRITE on the parent.
 
-Delete through the component service. Its fence precedes the kind's idempotent backing-data cleanup and thread purge, followed by unregister. A failed cleanup remains retryable through the durable lifecycle owner. Placement and ownership are separate: removing a workspace pointer does not delete the backing resource.
+Delete through the component service. The order is fence, the kind's idempotent backing-data cleanup, unregister, then the primary thread purge after commit. A failed cleanup or purge remains retryable through the durable lifecycle owner. Placement and ownership are separate: removing a workspace pointer does not delete the backing resource.
 
 Test creation, sharing, denied access, concurrent context updates, repeated deletion, and public metadata. See [security](security-and-module-access.md).
