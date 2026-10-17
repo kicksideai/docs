@@ -10,13 +10,13 @@ Keep one owner for derived knowledge metadata such as status, error, document co
 
 ## Upload content
 
-Uploads owns bytes, records, processing jobs, tokens, derived artifacts, and preview endpoints. Upload type entries use `meta.type: upload.type`; priority selects more specific processors before generic ones.
+Uploads owns bytes, records, processing jobs, tokens, derived artifacts, and preview endpoints. Upload type entries use `meta.type: upload.type`; a higher `priority` runs before a lower one, so specific processors precede generic ones.
 
-A consumer uses Uploads' content contract or a signed upload token. Tokens carry the upload ID, purpose, expiry, and minimal routing or trace information. Private configuration does not belong in a token. Conversion code remains below the Uploads resource layer.
+A consumer uses the `kickside.contract:content_provider` contract (`get_content`, `get_info`) or a signed upload token. A token carries `purpose`, `upload_id`, `artifact_id`, `audience`, `issued_at`, and `expires_at`. Private configuration does not belong in a token. Conversion code remains below the Uploads resource layer.
 
 ## Human review
 
-Inbox owns assignment, item events, its read projection, and public counts. Item kinds are entries with `meta.type: inbox.item_type`, including their title, severity, and renderer.
+Inbox owns assignment, item events, its read projection, and public counts. Item kinds are entries with `meta.type: inbox.item_type`, a `value`, `title`, `severity`, and a renderer named by `component_tag` and `component_base_path`.
 
 `kickside.inbox.sink:inbox_sink` accepts notices. `kickside.inbox:block.review` is the durable human-wait reference: Inbox owns the item while Blocks/Dataflow own parking and signaling. Use the native signal identity to resume a nested or restarted wait.
 

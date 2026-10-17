@@ -1,6 +1,6 @@
 # Settings declarations
 
-The settings module discovers three registry surfaces:
+Settings use three registry surfaces. The settings module discovers definitions and blocks; the UI module discovers System tabs.
 
 | `meta.type` | Purpose |
 | --- | --- |
@@ -8,7 +8,7 @@ The settings module discovers three registry surfaces:
 | `kickside.settings:block` | A Settings navigation block or custom editor |
 | `ui.settings_tab` | A System tab |
 
-Definition fields belong at the entry's top level, not under `meta`: namespace, key, value type, default, description, title, category, order, scope, editability, visibility, and optional validation/UI fields.
+Definition fields belong at the entry's top level, not under `meta`: `namespace`, `key`, and a supported `value_type` are required. Optional fields include `default`, `description`, `title`, `category`, `order`, `scope`, `editable`, `visible`, `read_access`, `schema`, `validate_func`, `ui`, and `owner`.
 
 ```yaml
 - name: setting.token_expiration
@@ -22,7 +22,7 @@ Definition fields belong at the entry's top level, not under `meta`: namespace, 
   scope: global
 ```
 
-This declaration is the Users setting shape; another module uses its own namespace and key.
+This is an abbreviated form of the Users module's `setting.token_expiration`, which also declares `category`, `order`, `description`, `editable`, and `visible`. Another module uses its own namespace and key.
 
 ## Values and validation
 

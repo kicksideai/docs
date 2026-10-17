@@ -13,6 +13,6 @@ This design uses a fictional Deals module. It describes a module architecture, n
 9. Serve a board web component through the module's static and view declarations. Refetch committed state on Component notifications.
 10. Verify a write, duplicate delivery, board refresh, trigger, parked review, resumed Flow, denied actor, and cleanup on both database engines.
 
-CRM delivery recovery retains the sink's receipt and lease protocol. An ambiguous write cannot become a success through an unverified retry.
+The CRM sink commits a receipt after the domain event and projection settle. Recovery compares the stored payload digest before it replays or rebuilds a receipt; a different payload under the same identity returns a conflict.
 
 See [CRM contracts](https://github.com/kicksideai/crm/blob/main/docs/module.md), [Automation delivery](automations-and-dataflows.md), and [Flow composition](blocks-flows-workflows.md).

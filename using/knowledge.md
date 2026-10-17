@@ -3,7 +3,7 @@
 The Knowledge module manages resources; a separately installed engine supplies ingestion, retrieval, and detail views.
 
 1. Open **Knowledge** and choose **New knowledge base**.
-2. Select an installed engine and enter the requested name and settings.
+2. Select a knowledge base type (an installed engine) and enter the requested name and settings.
 3. Open the created base and use the engine's available content or ingestion controls.
 4. Inspect its processing state and counts before querying newly added content.
 5. Add a knowledge capability to an agent and select the base. Test a question about content in that base.

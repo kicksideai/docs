@@ -1,6 +1,6 @@
 # Dashboard
 
-The optional `kickside/dashboard` module lists installed navigable surfaces. Each card includes a name, description, icon, and route.
+The `kickside/dashboard` module ships with KickSide and lists installed navigable surfaces. Each card shows a name, description, and icon.
 
 Open **Dashboard** and select a card to open the feature.
 

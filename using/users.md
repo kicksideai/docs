@@ -4,16 +4,16 @@ Account management and module access are separate capabilities.
 
 ## Manage accounts
 
-Open **System → Users** to create, edit, disable, or manage account memberships. The **Users management** policy grants these controls; ordinary member access includes principal discovery for sharing and the signed-in user's own profile, not account administration.
+Open **System → Users** to create, edit, change the status of, delete, or manage the memberships of accounts. The **Users management** policy grants these controls; ordinary member access includes principal discovery for sharing and the signed-in user's own profile, not account administration.
 
-New accounts join the default group when `join_default_group` is true, its default. An explicit group list remains explicit. Changing bootstrap credentials does not reset an existing account password.
+New accounts join the default members group while the setting **Default members group for new users** (`join_default_group`) is on, its default. Clearing **Use default membership** when creating a user assigns only the selected groups. Changing bootstrap credentials does not reset an existing account password.
 
 ## Set module access
 
 1. Open **System → Security → Scopes** and choose **New scope**, or open a custom scope to edit it. Enter its slug and label.
 2. Select the public module policies it needs and save it. The composed scope supplies a group for account membership.
 3. Open the user in **System → Users** and assign the group.
-4. Remove Members when the user needs a narrower set than the default installation access.
+4. For narrower access, remove the application Members group (`app.security:members`) and keep **User** (`app.security:user`), which carries the signed-in baseline.
 5. Sign in as that user and check the visible features and permitted actions.
 
 ![Security Scopes tab showing the Administrator scope and its policies in a demonstration workspace](assets/kickside/security.png)

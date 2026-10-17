@@ -6,8 +6,9 @@ Install the Wippy CLI on Linux or macOS:
 
 ```sh
 curl -fsSL https://hub.wippy.ai/install.sh | bash
-wippy version
 ```
+
+The script installs to `~/.wippy/bin` and adds it to your shell profile. Open a new terminal and run `wippy version`.
 
 On Windows, download the executable from [Wippy releases](https://hub.wippy.ai/releases) and add its directory to `PATH`. The [Wippy installation guide](https://wippy.ai/en/start/installation/) lists platform requirements.
 
@@ -36,10 +37,10 @@ The first-login wizard has six steps:
 1. **Name your workspace** sets the name shown in the header and login screen.
 2. **Add your logo** accepts a square image and selects sidebar or top-bar navigation.
 3. **Connect your AI model** configures a model provider and assigns model classes.
-4. **Pick your instruments** selects capability bundles, shows their combined package list, and installs them together.
+4. **Pick your instruments** always includes the Knowledge base bundle and lets you add others or browse packages. It shows the combined package list and installs it before you continue.
 5. **Connect an external agent** configures access for an external client.
 6. **You're ready to go** completes setup.
 
-The logo, model, and external-agent steps offer **Skip for now**. At the instrument step, review the available bundles or browse packages. Configure models later in **System → Models**, branding in **System → Appearance**, and packages in **System → Modules**. An administrator can reopen setup from Appearance.
+The logo, model, and external-agent steps offer **Skip for now**; the instrument step does not. Configure models later in **System → Models**, branding in **System → Appearance**, and packages in **System → Modules**. An administrator can reopen setup from Appearance.
 
 Continue with [your first agent](first-agent.md). For external services, see [connect a provider](first-connection.md); for additional features, see [install a module](first-module.md).

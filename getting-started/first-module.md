@@ -2,7 +2,7 @@
 
 An administrator installs packages from **System → Modules**.
 
-1. Open the Hub catalog and find a package by its Hub ID, such as `kickside/dashboard`.
+1. Open the Hub catalog and find a package by its Hub ID, such as `kickside/crm`.
 2. Open the install plan and review its dependencies.
 3. Supply any required host resources and security bindings.
 4. Apply the plan and wait for installation and migrations to finish.
