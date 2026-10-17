@@ -1,6 +1,6 @@
 # CRM
 
-CRM 0.4.1 provides typed records, relations, imports, search, and schema editing. A fresh CRM has an empty schema: it does not supply a company, contact, or opportunity schema by itself.
+CRM provides typed records, relations, imports, search, and schema editing. A fresh CRM has an empty schema: it does not supply a company, contact, or opportunity schema by itself.
 
 The screenshots show a fictional sales schema with companies, people, and deals configured for a demonstration workspace.
 
@@ -8,15 +8,15 @@ The screenshots show a fictional sales schema with companies, people, and deals 
 
 Install a business module that declares the objects and collections you need, or configure the schema through CRM's schema editor. The schema defines fields, types, relations, and collection views.
 
-{{ screenshot:crm/schema.png }} Review consuming modules before changing a shared field.
+![CRM schema editor for the fictional Companies object and its fields](assets/crm/schema.png) Review consuming modules before changing a shared field.
 
 Open a configured collection, create a record with its required fields, and save it. Open the saved record to inspect its fields, related records, and timeline. Available tables or boards follow the declared views.
 
-{{ screenshot:crm/records.png }}
+![CRM table of fictional deals with amount, close date, company, probability, and service line](assets/crm/records.png)
 
-{{ screenshot:crm/board.png }}
+![CRM board arranging fictional deals by sales pipeline stage](assets/crm/board.png)
 
-{{ screenshot:crm/timeline.png }}
+![CRM activity timeline with fictional meetings, calls, emails, and notes for people](assets/crm/timeline.png)
 
 ## Import and synchronize
 

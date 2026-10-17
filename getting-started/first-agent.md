@@ -10,7 +10,7 @@ When a new member has no personal agent, `agent-onboarding` displays the **Creat
 4. Choose **Create agent**. The prompt creates the personal agent and opens its chat.
 5. Send a short paragraph and check its response.
 
-{{ screenshot:kickside/agent-onboarding.png }}
+![Create your first agent dialog with Artifacts, File Manager, and All Capabilities selected and a model setup prompt](assets/kickside/agent-onboarding.png)
 
 If the run fails, check the provider credentials and model assignment in Models. A capability that reads a knowledge base or connection also needs access to that resource. A member can select **Skip for now** and return to create an agent later.
 

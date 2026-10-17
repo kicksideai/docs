@@ -10,6 +10,8 @@ An **Automation** is ongoing configured behavior. A **Workflow** is a versioned 
 4. Save the configuration and enable the Automation.
 5. Open its details to inspect status and available controls. Check failures before retrying an operation that writes to an external service.
 
+In Data Sync, a transform can explicitly skip an item with a reason. Activity records the skip without a destination write or failed delivery. Returning no value without an explicit skip is a transform failure. See the [transform contract](../building-modules/automations-and-dataflows.md).
+
 The kind declares its supported controls, such as pause, resume, run now, replay, or resync. An administrator of the Automation can inspect **Activity** delivery and control histories. **Runs as** identifies the executor; **Authorized by** identifies the configuring authorizer. The person requesting a control does not replace either identity.
 
 ## Build a Workflow

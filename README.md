@@ -12,7 +12,7 @@ Product guides, module authoring documentation, and reference pages in Markdown.
 - [Building modules](building-modules/index.md): contracts, Lua APIs, web components, and testing.
 - [Reference](reference/index.md): module catalog and public interfaces.
 
-Shared brand images live in `getting-started/assets/brand/`. Product screenshots live in `using/assets/<repository>/` and support both these guides and the product repository READMEs.
+Shared brand images live in `getting-started/assets/brand/`. Product screenshots live in `using/assets/<repository>/`, with the first-agent prompt in `getting-started/assets/kickside/` and support both these guides and the product repository READMEs.
 
 ![KickSide documentation home](https://raw.githubusercontent.com/kicksideai/docs/main/using/assets/docs/site.png)
 

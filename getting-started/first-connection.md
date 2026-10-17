@@ -8,6 +8,6 @@ Connections authorize external accounts for agents and automations. Model creden
 4. Return to Connections and inspect the connection's status.
 5. Select the connection in the agent capability or automation that uses it. Share the resource with other users when they need access.
 
-{{ screenshot:kickside/connections.png }}
+![Connections page in a fresh demonstration workspace](../using/assets/kickside/connections.png)
 
 Installing a provider makes its tools and setup form available. It does not authorize an external account. See [connections](../using/connections.md) for sharing and renewal.

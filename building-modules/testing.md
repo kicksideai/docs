@@ -38,6 +38,6 @@ Cover denied and allowed actors, duplicate writes, retries, rollback, deletion, 
 
 Declare a migration `function.lua` with `meta.type: migration`, a UTC timestamp, and a host-supplied target database. Ordering uses timestamp then entry ID; `depends_on` does not order migrations.
 
-Use engine-specific SQLite and PostgreSQL branches. A fresh creation declares its final columns, constraints, and indexes. Forward migrations preserve existing data and published shapes. Parameterize writes and release connections on every path. Product defaults belong in registry declarations or normal domain events.
+Use engine-specific SQLite and PostgreSQL branches. A fresh creation declares its final columns, constraints, and indexes. Forward migrations preserve existing data and published interfaces. Changes that retire a stored shape include a forward-only, idempotent, resumable migration in the owning module. Test it with data from the previous published version on both engines. Existing installations receive it through Hub Update all and restart. Parameterize writes and release connections on every path. Product defaults belong in registry declarations or normal domain events.
 
 Use the module Makefile's verification and PostgreSQL targets. The template provides `make setup`, `make lint typecheck build test`, `make postgres-up`, `make test-pg`, and `make postgres-down`.

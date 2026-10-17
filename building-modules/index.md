@@ -39,4 +39,4 @@ The published module template's security example can differ from current module 
 
 The module template includes a status page that reads the persisted log entry count through its own API. This example shows a new installation with no log entries.
 
-{{ screenshot:module/starter.png }}
+![The starter web component displays its persisted log entry count](../using/assets/module/starter.png)

@@ -23,7 +23,7 @@ wippy run kickside/kickside -c --profile quickstart
 
 Open `http://localhost:8085`. A fresh quickstart installation creates `admin@kickside.local` with password `kickside-admin`. Sign in and change that password in **System → Users**. Bootstrap credentials apply only to the first boot; restarting with different bootstrap values does not reset an existing account.
 
-Keep the installation directory. It contains the resolved module lock, database files, uploads, and encryption key. Restart from that directory:
+Keep the installation directory. It contains the resolved module lock, application database, durable SQLite registry history, uploads, and encryption key. PostgreSQL deployments configure the application connection and registry-history DSN separately; see the [application reference](https://github.com/kicksideai/kickside/blob/main/app/README.md#postgres). Restart from that directory:
 
 ```sh
 wippy run -c --profile quickstart
