@@ -12,7 +12,7 @@ Install `chestor/workspace` and the component kinds you need. The Workspace disp
 
 Open Workspace and use its create control to select an installed kind. Enter the requested configuration, then open the entry. A kind needs a declared creation view to appear in the picker. Sharing and inherited access govern the tree.
 
-{{ screenshot:chestor/workspace.png }}
+![Workspace folder with a fictional architecture graph, data model, roadmap, and delivery journal](assets/chestor/workspace.png)
 
 Workspace placement does not transfer ownership of a backing resource. Removing a file entry removes its pointer; removing a folder removes descendant workspace entries. Pinned, provisioned, and system entries reject deletion.
 
@@ -20,10 +20,10 @@ DB Schema describes a schema; it does not provision an application database. Jou
 
 The [Chestor repository](https://github.com/kicksideai/chestor) owns the domain modules.
 
-{{ screenshot:chestor/graph.png }}
+![Chestor Graph shows a fictional patient platform architecture from apps through services to integrations and data stores](assets/chestor/graph.png)
 
-{{ screenshot:chestor/roadmap.png }}
+![Fictional patient platform roadmap across patient experience, clinic operations, and platform layers](assets/chestor/roadmap.png)
 
-{{ screenshot:chestor/db-schema.png }}
+![Fictional patient app data model with clinics, providers, patients, appointments, intake forms, and reminders](assets/chestor/db-schema.png)
 
-{{ screenshot:chestor/journal.png }}
+![Fictional delivery journal with open work, decisions, findings, risks, and a milestone](assets/chestor/journal.png)

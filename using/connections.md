@@ -2,7 +2,7 @@
 
 Open **Connections** to inspect connected accounts or choose **Connect app** to authorize another one. Each installed provider supplies its setup fields and supported operations.
 
-{{ screenshot:kickside/connections.png }}
+![Connections page in a fresh demonstration workspace](assets/kickside/connections.png)
 
 A connection card provides status and available actions. Share it with the users or groups that need the resource. Use its renewal or reconnect action when authorization expires; remove it when the account is no longer needed.
 
@@ -12,4 +12,4 @@ Model provider profiles live in **System → Models**. The `kickside/mcp-client`
 
 The Remote MCP connector appears as an available service after its module is installed.
 
-{{ screenshot:providers/connections.png }}
+![Connect an app dialog lists the Remote MCP connector](assets/providers/connections.png)

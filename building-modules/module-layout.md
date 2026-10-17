@@ -15,6 +15,7 @@ src/blocks/
 ui/src/
 static/
 test/src/
+test/wippy.yaml
 test/.wippy.yaml
 ```
 

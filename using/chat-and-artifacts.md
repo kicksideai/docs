@@ -2,7 +2,7 @@
 
 Choose **New chat**, select an agent, and send a message. The agent uses its configured model and capabilities. Open **Sessions** to return to a saved conversation.
 
-{{ screenshot:kickside/chat-draft.png }}
+![New chat with an unsent fictional question about a deal and no generated response](assets/kickside/chat-draft.png)
 
 Use the chat attachment control to supply files. File processing depends on the installed upload processors and converters; inspect a failed upload in **Uploads** before retrying it.
 

@@ -24,4 +24,4 @@ Publish dependencies before dependent packages. A published release is immutable
 
 Use **System → Modules** to review transitive dependencies and host requirements before applying a plan. Check the deployed registry, UI assets, endpoints, and existing component data after migrations complete.
 
-The shell refreshes its catalog after Hub install, uninstall, and migration completion events. Root application self-update through this surface is limited by the application's deployment requirements.
+The shell refreshes its catalog after Hub install, uninstall, and migration completion events. Use **System → Modules → Update all**, review the plan, apply it, and restart from the same installation directory. Module migrations update existing data as part of the Hub update; no separate data-conversion step is required.

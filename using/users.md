@@ -16,7 +16,7 @@ New accounts join the default group when `join_default_group` is true, its defau
 4. Remove Members when the user needs a narrower set than the default installation access.
 5. Sign in as that user and check the visible features and permitted actions.
 
-{{ screenshot:kickside/security.png }}
+![Security Scopes tab showing the Administrator scope and its policies in a demonstration workspace](assets/kickside/security.png)
 
 The effective scope is the union of assigned group policies. A deny overrides an allow from any group. Access reductions revoke affected sessions. Allow-only expansions appear at the next login or token issue.
 

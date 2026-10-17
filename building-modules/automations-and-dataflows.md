@@ -6,9 +6,16 @@ The Automation engine owns drives, bounded rounds, cursors, receipts, retry ledg
 
 Declare a `contract.binding` with `meta.type: kickside.automation`, class, input schema, supported actions, and Component, Installable, Round Consumer, and Deletable contracts. Data Sync is a source/transform/destination example; Channel Responder is a channel-specific example.
 
-Data Sync's input requires title, trigger, sink port, enabled state, and transform. Its v2 trigger selects an event or collection port and its resource config. Transforms are none, expression, LLM, function, or code. Function transforms declare enforceable resource references; admission checks both the operator and selected principal. A transform skips an item explicitly by returning `{present = false, skip = "<reason>"}`; the round records it as skipped, with no sink write and no failed delivery. A transform that returns no value without a skip fails the item, so items are never dropped silently.
+Data Sync's input requires title, trigger, sink port, enabled state, and transform. Its v2 trigger selects an event or collection port and its resource config. Transforms are none, expression, LLM, function, or code. Function transforms receive `{item = {item_key, envelope, input}, config}` with the source payload in `item.input`. Expression bindings expose the payload as `payload` and `input`. Function transforms declare enforceable resource references; admission checks both the operator and selected principal. A transform skips an item explicitly by returning `{present = false, skip = "<reason>"}`; the round records it as skipped, with no sink write and no failed delivery. A transform that returns no value without a skip fails the item, so items are never dropped silently.
 
 Event sources pull committed thread sequences. Collection sources implement `kickside.data:pullable`. Timer sources use persisted occurrences and exact cadence deadlines. Payload schema describes `item.payload`; stable item keys, operation, deduplication, and source version belong to the envelope.
+
+Editors obtain real source envelopes through
+`POST /api/v1/automations/source-samples` with `{source, config, limit}`.
+The result contains `success`, `samples`, and the selected source’s
+`output_schema` when declared. The bounded read uses the caller’s identity and
+does not advance an installed drive. An empty source returns no samples;
+generation does not fabricate payloads from its schema.
 
 ## Rounds and delivery
 

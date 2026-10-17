@@ -20,4 +20,10 @@ The resolver assembles the agent's prompt, model selection, configured traits, t
 
 The artifact capability uses the installed component and renderer catalog. Uploads owns its stored content. A module adds an artifact renderer or tool through its registry declarations and preserves resource checks at invocation.
 
+## Tool results
+
+Tools return structured values directly: an object, an array, or a document string. They do not JSON-encode objects into text or add a generic result envelope. A typed or infrastructure failure returns `nil, err`; a domain refusal can return `{success = false, error = "...", ...}` with its domain fields. The MCP transport encodes successful objects as JSON in text content. Typed failures include `structuredContent.error`; domain refusals retain their table in `structuredContent`. Both failure forms set `isError`.
+
+List operations return compact summary rows and preserve paging information. Use the tool's declared `fields` input to select additional row fields, and its cursor, page, or offset input to continue. Read one selected object with the corresponding get operation for full details. Paging names and collection keys belong to each tool schema; do not assume a universal envelope. See the [module catalog](../reference/modules.md) for the owning references.
+
 Test capability discovery, context validation, tool access, missing model configuration, and the actual result under a non-administrator identity.
