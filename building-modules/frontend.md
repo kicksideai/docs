@@ -2,11 +2,11 @@
 
 Use the current official Wippy documentation for frontend implementation:
 
-- [Compliance checklist](https://wippy.ai/llm/path/en/frontend/micro-frontends/compliance-checklist)
-- [Theming](https://wippy.ai/llm/path/en/frontend/micro-frontends/theming)
-- [Web-component theming](https://wippy.ai/llm/path/en/frontend/micro-frontends/web-component-theming)
-- [Web components](https://wippy.ai/llm/path/en/frontend/micro-frontends/web-component)
-- [Proxy API](https://wippy.ai/llm/path/en/frontend/micro-frontends/proxy-api)
+- [Compliance checklist](https://wippy.ai/en/frontend/micro-frontends/compliance-checklist)
+- [Theming](https://wippy.ai/en/frontend/micro-frontends/theming)
+- [Web-component theming](https://wippy.ai/en/frontend/micro-frontends/web-component-theming)
+- [Web components](https://wippy.ai/en/frontend/micro-frontends/web-component)
+- [Proxy API](https://wippy.ai/en/frontend/micro-frontends/proxy-api)
 
 ## Declare and serve a page
 

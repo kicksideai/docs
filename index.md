@@ -11,4 +11,4 @@ Start with installation and your first agent, then learn the features your works
 | [Building modules](building-modules/index.md) | Add a module through registry declarations and shared contracts |
 | [Reference](reference/index.md) | Look up packages, terminology, and access policies |
 
-These guides describe KickSide 0.2.11, Security 0.2.5, Core 0.2.6, Component 0.2.5, Connection 0.2.5, CRM 0.4.1, and Keeper 0.5.107. Optional modules add their own navigation, capabilities, and configuration. Access permissions also determine which controls appear.
+These guides describe KickSide 0.2.14, Security 0.2.8, Core 0.3.1, Component 0.3.0, Connection 0.3.0, CRM 0.5.0, and Keeper 0.5.108. Optional modules add their own navigation, capabilities, and configuration. Access permissions also determine which controls appear.

@@ -12,7 +12,7 @@ time, so a source declaration is not a snapshot of one installation’s bindings
 | `app.security:admin` | Root administration |
 | `app.security:user` | Signed-in baseline: shell, sessions, own profile, agent selection, Jobs, and Core capabilities |
 | `app.security:members` | Application default membership, including Core and platform Members |
-| `kickside.security.groups:members` | Platform composition of installed public module-access policies |
+| `kickside.security.groups:members` | Platform composition of installed public `module_access` policies and policies that declare the Contract member scope |
 | `kickside.security.scopes:set_<hash>` | Projected scope for a distinct assigned group set |
 
 Policies union across assigned groups; denies take precedence. Members excludes
@@ -34,6 +34,8 @@ Public `security.policy` entries with `meta.intent: module_access` contribute
 to platform Members. Private companion policies grant the module’s declared
 runtime operations. Policies with `meta.intent: tool_access` are separate
 selectable capabilities; the default composition does not select them.
+`meta.intent: module_management` marks account administration (**Users
+management**), which Members also does not select.
 
 The published member-scope requirement defaults to
 `kickside.security.groups:members`; an explicit existing host binding wins.
@@ -75,6 +77,7 @@ requirement IDs and targets when extending policies.
 | Ui | [`kickside.ui.security:module_access`](https://github.com/kicksideai/kickside/blob/main/platform/ui/src/security/module_access/_index.yaml) | `module_access` |
 | Uploads | [`kickside.uploads.security:module_access`](https://github.com/kicksideai/kickside/blob/main/platform/uploads/src/security/module_access/_index.yaml) | `module_access` |
 | User directory | [`kickside.users.security:directory_access`](https://github.com/kicksideai/kickside/blob/main/platform/users/src/security/module_access/_index.yaml) | `module_access` |
+| Users management | [`kickside.users.security:module_access`](https://github.com/kicksideai/kickside/blob/main/platform/users/src/security/module_access/_index.yaml) | `module_management` |
 | Webhooks | [`kickside.webhooks.security:module_access`](https://github.com/kicksideai/kickside/blob/main/platform/webhooks/src/security/module_access/_index.yaml) | `module_access` |
 | Widgets | [`kickside.widgets.security:module_access`](https://github.com/kicksideai/kickside/blob/main/platform/widgets/src/security/module_access/_index.yaml) | `module_access` |
 | Workflows | [`kickside.workflows.security:module_access`](https://github.com/kicksideai/kickside/blob/main/platform/workflows/src/security/module_access/_index.yaml) | `module_access` |
@@ -476,7 +479,6 @@ for request/result schemas and operation-specific access checks.
 | [`chestor.workspace.api:delete_entry.endpoint`](https://github.com/kicksideai/chestor/blob/main/workspace/src/api/_index.yaml) | `DELETE` | `/workspace/entries/{id}` | `chestor.workspace:api_router` |
 | [`chestor.workspace.api:grant_entry.endpoint`](https://github.com/kicksideai/chestor/blob/main/workspace/src/api/_index.yaml) | `POST` | `/workspace/entries/{id}/grant` | `chestor.workspace:api_router` |
 | [`chestor.workspace.api:revoke_entry.endpoint`](https://github.com/kicksideai/chestor/blob/main/workspace/src/api/_index.yaml) | `POST` | `/workspace/entries/{id}/revoke` | `chestor.workspace:api_router` |
-| [`acme.starter.api:get_status.endpoint`](https://github.com/kicksideai/module/blob/main/src/api/_index.yaml) | `GET` | `/starter/status` | `acme.starter:api_router` |
 
 See [users and groups](../using/users.md) for configuration and
 [module policy authoring](../building-modules/security-and-module-access.md)

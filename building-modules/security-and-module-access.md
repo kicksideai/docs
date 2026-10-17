@@ -4,7 +4,7 @@ The authenticated router runs `token_auth` then `endpoint_firewall`. The firewal
 
 ## Module policies and groups
 
-A selectable module policy is a public `security.policy` with empty `groups`, title, surface, and `meta.intent: module_access`. It includes private companion policies for declared runtime capabilities. Endpoint grants enumerate exact IDs, including their published names.
+A selectable module policy is a public `security.policy` with empty `groups`, title, surface, and `meta.intent: module_access`. It includes private companion policies for declared runtime capabilities. Module endpoint grants enumerate exact IDs.
 
 The published `user_security_scope` requirement declares `meta.value_kind: security.scope` and defaults to `kickside.security.groups:members`. Retain its ID and existing targets; append new targets when adding a policy. An existing host binding takes precedence on update. Modules using the shared Contract member interface declare `meta.member_scope: kickside.contract.http:user_security_scope`.
 
@@ -16,7 +16,7 @@ Navigation, registry discovery, contract implementations, views, and MCP use the
 
 `app.security:user` supplies the signed-in baseline. `app.security:members` includes Core and platform Members. Users management is a separate selectable capability; own profile access does not require account administration.
 
-Access reductions revoke affected sessions. Allow-only expansions appear at the next login or token issue. MCP checks the owner's current groups per invocation and retains credential restrictions.
+Access reductions revoke affected sessions. Allow-only expansions appear at the next login or token issue. MCP resolves the owner's current groups per invocation within the credential's issuance ceiling and restrictions; reissue a credential to expand its authority.
 
 ## Execution authority
 

@@ -8,6 +8,6 @@ Use the chat attachment control to supply files. File processing depends on the 
 
 An agent with the artifact capability can create supported artifacts. The installed component and renderer catalog determines the available types. Ask for the result you need and give the agent access to its source resources.
 
-Open the **Artifacts** gallery to view an artifact and its originating session. If an artifact fails to open, check access to its resource and whether the owning renderer is installed.
+In **Sessions**, choose **Artifacts** to view an artifact and its originating session. If an artifact fails to open, check access to its resource and whether the owning renderer is installed.
 
 See [agents](agents.md), [uploads](uploads.md), and [knowledge](knowledge.md).

@@ -35,7 +35,7 @@ Choose your own organization and package name when creating a real module. Initi
 
 Use [application patterns](application-patterns.md) to choose resource boundaries, [recipes](recipes.md) for extension tasks, and the [Deals CRM walkthrough](deals-crm.md) for a composed application.
 
-The published module template's security example can differ from current module policies. Use the exact endpoint and group rules in this handbook; endpoint names do not grant access.
+The template's security entries follow [module access](security-and-module-access.md): a `module_access` policy over exact entry IDs, a private runtime companion, and a `user_security_scope` requirement that defaults to the platform Members group. Keep that shape when adding endpoints.
 
 The module template includes a status page that reads the persisted log entry count through its own API. This example shows a new installation with no log entries.
 

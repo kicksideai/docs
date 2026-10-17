@@ -6,7 +6,7 @@ A component row stores `component_id`, `impl_id`, private context, placement, ti
 
 A component kind is a `contract.binding` implementing `kickside.contract:component`. Its metadata declares class, title, icon, and optional events, projections, retention, and provisioning. Add `kickside.contract:deletable` when the kind owns tables or files.
 
-On-demand resources register through `kickside.component:component_service`. Provisioned kinds declare `meta.provision` and a `meta.class` array. Autoinit creates deterministic per-user or system resources; the first class identifies the provisioned kind.
+On-demand resources register through `kickside.component:component_service`. Provisioned kinds declare `meta.provision` and a `meta.class` array. Autoinit creates deterministic resources per user (`provision.scope: user`, the default) or once per installation (`system`); the first `meta.class` entry is the provisioned class.
 
 A kind needs `meta.component.create.view` to appear in a creation picker and `meta.component.manage.view` to declare its management view.
 
@@ -17,7 +17,8 @@ Import `kickside.component:component` as `component` and use the actor-bound cli
 | Operation | Interface |
 | --- | --- |
 | Open a resource | `component.open(id, required_access, target_contract_id)` |
-| Read private context and its revision | `component.read_context(id, required_access)` |
+| Read private context | `component.get_context(id, required_access)` |
+| Read context with its revision | Component service `get_access_context` with `include_context = true`; returns `context` and `context_revision` |
 | Change safe display fields | `component.set_meta(id, fields, opts)` |
 | Change context | `component.update(id, commands, opts)` |
 | Query visible resources | Component service `list`, `query`, or `count` |

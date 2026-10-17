@@ -1,6 +1,6 @@
 # Appearance
 
-Open **System → Appearance** to change workspace branding and navigation. The editor configures the name, logo, navigation layout, and visible items supported by the installed appearance module.
+Open **System → Appearance** to change workspace branding and navigation. The editor configures the workspace name, logo, base tone, color scheme, navigation layout, home page, and the order, labels, icons, and visibility of navigation items.
 
 Save the change and inspect the header or navigation. Logo uploads supply the asset the shell renders. Module pages that use the shared theme tokens follow the host theme.
 

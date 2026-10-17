@@ -4,7 +4,7 @@ A Block is one typed capability. A Flow is a native Dataflow DAG and its durable
 
 ## Block declarations
 
-A Block entry uses `meta.type: kickside.block` and `data.block.api_version: kickside.block/v1`. It declares object schemas for input, config, and output, output ports, presentation metadata, and exactly one execution target: function, agent, or wait.
+A Block is a `registry.entry` with `meta.type: kickside.block` and `data.block.api_version: kickside.block/v1`. It declares object schemas for input, config, and output, output ports, presentation metadata, and exactly one execution target: `function` (`function_id`), `agent` (`agent_id`), or `wait`.
 
 A `failed` port and error schema are declared together. A function Block receives `{input, config}`. Unknown declaration fields fail validation. Public tools are projected as virtual Blocks from their authoritative tool schemas; do not duplicate them.
 
@@ -16,10 +16,10 @@ A portable Flow uses `meta.type: kickside.flow` and `data.flow.api_version: kick
 
 Workflows owns visual authoring, validation, publishing, compilation, and run history. Its definition event stream is authoritative. Publishing freezes a compiled version; launching gives the run independent native node and data IDs.
 
-Start, Finish, Error, Condition, Loop, For each, and Combine are structural nodes. They route or compose execution rather than substituting empty functions.
+The structural node kinds are `start`, `finish`, `error`, `branch` (Condition), `cycle` (Loop), `for_each` (For each), and `combine`; executable steps are `block` and `flow` (a nested published Flow). They route or compose execution rather than substituting empty functions.
 
 ## Waits and ports
 
-A wait lowers to `kickside.blocks:await`. Its durable park commits before a provider-owned arm. Resume uses the Flow ID and native signal ID through `kickside.blocks:resume`, including nested and restarted waits. The stored execution identity governs resumed work.
+A wait lowers to `kickside.blocks:await`. Its durable park commits before a provider-owned arm. Resume calls `kickside.blocks:resume` with `{dataflow_id, signal_id, payload}`, including nested and restarted waits. The stored execution identity governs resumed work.
 
 Block output ports live in `data.block.ports`, with `direction: out`. Automation ports are separate standalone catalog entries for ongoing sources and destinations.
