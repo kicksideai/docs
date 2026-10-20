@@ -18,6 +18,8 @@ Run the module Makefile's gates. For the template, run `make setup` followed by 
 
 Authenticate with `wippy auth login` and check `wippy auth status`. Use the Wippy CLI or the repository's release workflow to package a reviewed commit. `wippy publish --help` lists version, visibility, module type, and embed options. Inspect a dry run before publishing, and choose public visibility only when the package is ready for public distribution.
 
+The template's release workflow uses [Release Please](https://github.com/googleapis/release-please). Write each commit message and each pull request title in the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format, because Release Please reads them on `main` to find the next version and to write the changelog. It keeps one release pull request open. A merge of that pull request creates the tag and the GitHub release, and the workflow then publishes the released module to the Hub. Do not change `CHANGELOG.md`, `version.txt`, or `.release-please-manifest.json` manually.
+
 Publish dependencies before dependent packages. A published release is immutable; changes require a new version.
 
 ## Installation
