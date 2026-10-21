@@ -18,7 +18,7 @@ Each write carries `config`, `sink_op`, `input`, a per-delivery `idempotency_key
 
 Within the destination's receipt scope `(origin, sink_op, idempotency_key)`, the same key with the same write content returns the recorded result without repeating the effect. Reusing the key with different write content returns `idempotency_conflict`. A success reports a committed result. A classified failure follows the contract's DataError schema, including its permitted `scope` values.
 
-The optional `identity_key` field and key semantics are part of the [current writable contract](https://github.com/kicksideai/kickside/blob/main/core/contract/src/data/registry/writable_contracts/_index.yaml). Direct Channel delivery replay is available from the upcoming release that includes [kickside#77](https://github.com/kicksideai/kickside/pull/77); CRM's `idempotency_conflict` classification is available from the upcoming release that includes [crm#18](https://github.com/kicksideai/crm/pull/18); direct Discord delivery replay is available from the upcoming release that includes [providers#19](https://github.com/kicksideai/providers/pull/19).
+The optional `identity_key` field and key semantics are part of the [current writable contract](https://github.com/kicksideai/kickside/blob/main/core/contract/src/data/registry/writable_contracts/_index.yaml). CRM's `idempotency_conflict` classification is available from the upcoming release that includes [crm#18](https://github.com/kicksideai/crm/pull/18).
 
 ## Automation ports
 
