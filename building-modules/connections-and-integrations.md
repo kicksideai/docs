@@ -22,3 +22,11 @@ Stored connection states are `connected`, `needs_reauth`, and `disabled`; `expir
 OAuth owns the authorization protocol; the provider declares its connector. Public callbacks verify their signature or token before admitting a delivery. The Channel or Automation owner resolves the stored execution identity before tools and outbound effects. The external sender and connection owner do not replace that identity.
 
 Read credentials through the actor-validated component service. Route API handlers, tools, and Blocks through the same transport and domain helpers. Test credential validation, discovery, renewal, reply, deletion, and denied resource access.
+
+## Reply delivery keys
+
+From the upcoming release that includes [kickside#77](https://github.com/kicksideai/kickside/pull/77), `send_reply` accepts an optional, non-empty `idempotency_key` alongside `resource_id`, `content`, and the existing optional fields. Keep the same key for every attempt of one delivery. A provider with native send idempotency uses it to return the existing message on a retry. Omitting the key preserves the existing send behavior.
+
+The shared reply sender derives a separate key for each content chunk as `<idempotency_key>#<chunk-index>`, starting at 1. Each retry of the same chunk retains that key.
+
+Discord maps the key to a deterministic message `nonce` with `enforce_nonce: true` from the upcoming release that includes [providers#19](https://github.com/kicksideai/providers/pull/19). Discord deduplicates matching nonces from the same author within its deduplication window. The provider key does not by itself promise indefinite replay; writable destinations use the [write receipt contract](contracts-and-ports.md#writable-destinations) for recorded results.

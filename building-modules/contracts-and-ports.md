@@ -14,7 +14,11 @@ A `kickside.data:writable` binding declares:
 - `meta.input_shape`: `record` or `content`.
 - The `write` method's function ID.
 
-Each write carries `config`, `sink_op`, `input`, a per-delivery `idempotency_key`, and `origin`. Rounds also pass the stable `identity_key`; a sink that names records by key uses it in preference to `idempotency_key`. Stable identity names a destination record; delivery identity names one write attempt. A success reports a committed result. A classified failure follows the contract's DataError schema, including its permitted `scope` values.
+Each write carries `config`, `sink_op`, `input`, a per-delivery `idempotency_key`, and `origin`. The shared request schema makes `identity_key` optional; include it in every new writer. Rounds supply it as the stable destination record identity, and a sink that names records by key uses it in preference to `idempotency_key`. Stable identity names a destination record; delivery identity names one write, including all retries of that write. A later delivery that changes the record uses a new `idempotency_key` and retains its `identity_key`. Individual destinations can require stable identity for their operations.
+
+Within the destination's receipt scope `(origin, sink_op, idempotency_key)`, the same key with the same write content returns the recorded result without repeating the effect. Reusing the key with different write content returns `idempotency_conflict`. A success reports a committed result. A classified failure follows the contract's DataError schema, including its permitted `scope` values.
+
+The optional `identity_key` field and key semantics are part of the [current writable contract](https://github.com/kicksideai/kickside/blob/main/core/contract/src/data/registry/writable_contracts/_index.yaml). Direct Channel delivery replay is available from the upcoming release that includes [kickside#77](https://github.com/kicksideai/kickside/pull/77); CRM's `idempotency_conflict` classification is available from the upcoming release that includes [crm#18](https://github.com/kicksideai/crm/pull/18); direct Discord delivery replay is available from the upcoming release that includes [providers#19](https://github.com/kicksideai/providers/pull/19).
 
 ## Automation ports
 
