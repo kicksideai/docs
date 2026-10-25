@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/kicksideai/docs/compare/v0.1.1...v0.1.2) (2026-10-25)
+
+
+### Documentation
+
+* clarify group policy session fencing ([#13](https://github.com/kicksideai/docs/issues/13)) ([af5c04b](https://github.com/kicksideai/docs/commit/af5c04b13508dadc4bd9972a1d6d4a468ae55d45))
+
 ## [0.1.1](https://github.com/kicksideai/docs/compare/v0.1.0...v0.1.1) (2026-10-24)
 
 
