@@ -18,10 +18,13 @@ time, so a source declaration is not a snapshot of one installation’s bindings
 Policies union across assigned groups; denies take precedence. Members excludes
 **Users management**, while directory discovery and sharing remain available.
 For narrower access, remove Members and assign composed groups explicitly.
-Access reductions revoke affected sessions. Allow-only expansions do not revoke
-sessions; new tokens resolve the updated access. Durable MCP credentials retain
-their issuance ceiling, component restrictions, and revocation generations;
-reissue a credential to expand its authority.
+Group-policy reductions fence delegated authority while saved credentials retain
+their session index and authentication generation; validation resolves current
+groups and policies. Session or account revocation is a separate explicit
+lifecycle operation. Allow-only expansions do not revoke sessions; new tokens
+resolve the updated access. Durable MCP credentials retain their issuance
+ceiling, component restrictions, and revocation generations; reissue a
+credential to expand its authority.
 
 The authenticated router runs `token_auth` and `endpoint_firewall`, checking
 `access` on the exact endpoint ID. The handler also enforces its resource ACL.
