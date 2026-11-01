@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/kicksideai/docs/compare/v0.1.2...v0.1.3) (2026-11-01)
+
+
+### Documentation
+
+* **reference:** synchronize the module source catalog ([#15](https://github.com/kicksideai/docs/issues/15)) ([5849f1e](https://github.com/kicksideai/docs/commit/5849f1e9c1a36fabcc659fe83fe4953a46fa5180))
+
 ## [0.1.2](https://github.com/kicksideai/docs/compare/v0.1.1...v0.1.2) (2026-10-25)
 
 
