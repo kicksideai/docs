@@ -12,6 +12,10 @@ Implement the Connection contract and Reply Provider contract when needed. Decla
 
 Implement the Knowledge store lifecycle and publish one engine descriptor with config, views, query binding, and source workers. Materialize durable content facts through those workers. Test the complete create/ingest/query/delete path through the Knowledge API.
 
+## Process an uploaded file
+
+Mint an upload completion token for your function and attach it to the upload. Uploads runs the function as a durable Job after processing settles; read the derived artifacts there instead of polling. See [work after processing](knowledge-uploads-automation-inbox.md#work-after-processing). Test a fresh upload, a duplicate of an already-processed file, and a processing failure.
+
 ## Add a human review
 
 Compose the Inbox Review Block in a Flow. Inbox owns assignment and the decision record; Blocks/Dataflow owns the committed park and signal. Resume through the native signal identity and test a nested wait across restart.
