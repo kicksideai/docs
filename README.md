@@ -25,4 +25,4 @@ with a Documentation agent trait. `ListDocs` lists visible pages with section
 counts and cursor paging; `ReadDoc` reads the Markdown at an exact page path.
 
 With Wippy installed, run `make -C module lockrefresh` to resolve dependencies,
-then `make -C module lint test check` to validate the module and page catalog.
+then `make -C module lint test` to validate the module and page catalog.

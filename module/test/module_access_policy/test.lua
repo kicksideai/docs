@@ -43,6 +43,24 @@ return {run = test.run_cases(function()
                 test.eq(policy:evaluate(actor, "access", id .. ".unlisted"), "undefined")
             end
         end)
+        test.it("limits tool runtime grants to the traits namespace", function()
+            local public = assert(registry.get("kickside.docs.security:tool_access"))
+            test.eq(#public.meta.includes, 1)
+            test.eq(public.meta.includes[1], "kickside.docs.security:tool_runtime")
+            local entry = assert(registry.get(public.meta.includes[1]))
+            test.eq(entry.meta.private, true)
+            test.eq(#entry.data.policy.resources, 1)
+            test.eq(entry.data.policy.resources[1], "kickside.docs.traits:*")
+            local policy = assert(security.policy(tostring(entry.id)))
+            local actor = security.new_actor("tool-member", {})
+            for _, row in ipairs(assert(registry.find({}))) do
+                local id = tostring(row.id)
+                local expected = id:match("^kickside%.docs%.traits:") and "allow" or "undefined"
+                for _, action in ipairs(entry.data.policy.actions) do
+                    test.eq(policy:evaluate(actor, action, id), expected, id)
+                end
+            end
+        end)
         test.it("binds all four policies to the member requirement", function()
             local requirement = assert(registry.get("kickside.docs.security:user_security_scope"))
             test.eq(requirement.meta.value_kind, "security.scope")

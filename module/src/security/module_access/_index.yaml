@@ -1,115 +1,84 @@
-{
-  "version": "1.0",
-  "namespace": "kickside.docs.security",
-  "entries": [
-    {
-      "name": "module_access",
-      "kind": "security.policy",
-      "meta": {
-        "title": "Documentation",
-        "surface": "kickside.docs",
-        "intent": "module_access",
-        "includes": [
-          "kickside.docs.security:module_runtime"
-        ]
-      },
-      "groups": [],
-      "policy": {
-        "resources": [
-          "kickside.docs:*",
-          "kickside.docs.traits:*",
-          "kickside.docs.security:*"
-        ],
-        "actions": [
-          "registry.get",
-          "registry.find",
-          "contract.get",
-          "contract.open",
-          "contract.call",
-          "contract.implementations",
-          "contract.security",
-          "funcs.call",
-          "funcs.security"
-        ],
-        "effect": "allow"
-      }
-    },
-    {
-      "name": "tool_access",
-      "kind": "security.policy",
-      "meta": {
-        "title": "Documentation tools",
-        "surface": "kickside.docs",
-        "intent": "tool_access",
-        "includes": [
-          "kickside.docs.security:tool_runtime"
-        ]
-      },
-      "groups": [],
-      "policy": {
-        "resources": [
-          "kickside.docs.traits:list_docs_tool",
-          "kickside.docs.traits:read_doc_tool"
-        ],
-        "actions": [
-          "access"
-        ],
-        "effect": "allow"
-      }
-    },
-    {
-      "name": "module_runtime",
-      "kind": "security.policy",
-      "meta": {
-        "private": true
-      },
-      "groups": [],
-      "policy": {
-        "resources": [
-          "kickside.docs:*",
-          "kickside.docs.traits:*",
-          "kickside.docs.security:*"
-        ],
-        "actions": [
-          "registry.get",
-          "registry.find",
-          "contract.get",
-          "contract.open",
-          "contract.call",
-          "contract.implementations",
-          "contract.security",
-          "funcs.call",
-          "funcs.security"
-        ],
-        "effect": "allow"
-      }
-    },
-    {
-      "name": "tool_runtime",
-      "kind": "security.policy",
-      "meta": {
-        "private": true
-      },
-      "groups": [],
-      "policy": {
-        "resources": [
-          "kickside.docs:*",
-          "kickside.docs.traits:*",
-          "kickside.docs.security:*"
-        ],
-        "actions": [
-          "registry.get",
-          "registry.find",
-          "contract.get",
-          "contract.open",
-          "contract.call",
-          "contract.implementations",
-          "contract.security",
-          "funcs.call",
-          "funcs.security"
-        ],
-        "effect": "allow"
-      }
-    }
-  ]
-}
+version: '1.0'
+namespace: kickside.docs.security
+entries:
+  - name: module_access
+    kind: security.policy
+    meta:
+      title: Documentation
+      surface: kickside.docs
+      intent: module_access
+      includes:
+        - kickside.docs.security:module_runtime
+    groups: []
+    policy:
+      resources:
+        - kickside.docs:*
+        - kickside.docs.traits:*
+        - kickside.docs.security:*
+      actions:
+        - registry.get
+        - registry.find
+        - contract.get
+        - contract.open
+        - contract.call
+        - contract.implementations
+        - contract.security
+        - funcs.call
+        - funcs.security
+      effect: allow
+  - name: tool_access
+    kind: security.policy
+    meta:
+      title: Documentation tools
+      surface: kickside.docs
+      intent: tool_access
+      includes:
+        - kickside.docs.security:tool_runtime
+    groups: []
+    policy:
+      resources:
+        - kickside.docs.traits:list_docs_tool
+        - kickside.docs.traits:read_doc_tool
+      actions:
+        - access
+      effect: allow
+  - name: module_runtime
+    kind: security.policy
+    meta:
+      private: true
+    groups: []
+    policy:
+      resources:
+        - kickside.docs:*
+        - kickside.docs.traits:*
+        - kickside.docs.security:*
+      actions:
+        - registry.get
+        - registry.find
+        - contract.get
+        - contract.open
+        - contract.call
+        - contract.implementations
+        - contract.security
+        - funcs.call
+        - funcs.security
+      effect: allow
+  - name: tool_runtime
+    kind: security.policy
+    meta:
+      private: true
+    groups: []
+    policy:
+      resources:
+        - kickside.docs.traits:*
+      actions:
+        - registry.get
+        - registry.find
+        - contract.get
+        - contract.open
+        - contract.call
+        - contract.implementations
+        - contract.security
+        - funcs.call
+        - funcs.security
+      effect: allow

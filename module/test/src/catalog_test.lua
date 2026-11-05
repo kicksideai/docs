@@ -10,13 +10,16 @@ local sql = require("sql")
 local function repository_pages()
     local storage = assert(fs.get("app:repository"))
     local paths = {"index.md"}
-    for _, section in ipairs({"getting-started", "using", "building-modules", "reference"}) do
-        local iter, state = storage:readdir(section)
+    local function walk(directory)
+        local iter, state = storage:readdir(directory)
         if not iter then error(state) end
         for item in iter, state do
-            if item.name:match("%.md$") then paths[#paths + 1] = section .. "/" .. item.name end
+            local path = directory .. "/" .. item.name
+            if item.type == "directory" then walk(path)
+            elseif item.name:match("%.md$") then paths[#paths + 1] = path end
         end
     end
+    for _, section in ipairs({"getting-started", "using", "building-modules", "reference"}) do walk(section) end
     table.sort(paths)
     return storage, paths
 end
@@ -37,32 +40,62 @@ local function member(include_tools)
         :with_scope(assert(security.new_scope(policies)))
 end
 
-local function matches_schema(value, schema)
-    if schema.type == "object" or schema.type == "array" then
-        test.eq(type(value), "table")
-    elseif schema.type == "integer" then
-        test.eq(type(value), "number")
-        test.eq(value, math.floor(value))
-    else
-        test.eq(type(value), schema.type)
-    end
-    if schema.const ~= nil then test.eq(value, schema.const) end
-    if schema.minimum ~= nil then test.is_true(value >= schema.minimum) end
-    if schema.type == "object" then
-        for _, key in ipairs(schema.required or {}) do test.not_nil(value[key], key) end
-        for key, child in pairs(value) do
-            local property = schema.properties and schema.properties[key]
-            if property then matches_schema(child, property)
-            elseif schema.additionalProperties == false then test.fail("unexpected property: " .. key)
-            elseif type(schema.additionalProperties) == "table" then matches_schema(child, schema.additionalProperties) end
-        end
-    elseif schema.type == "array" then
-        for _, child in ipairs(value) do matches_schema(child, schema.items) end
-    end
-end
-
 local function define_tests()
     test.describe("documentation catalog", function()
+        test.it("declares every Markdown page exactly once with its exact bytes and metadata", function()
+            local storage, paths = repository_pages()
+            local expected, seen = {}, {}
+            for _, path in ipairs(paths) do expected[path] = true end
+            local entries = assert(registry.find({[".kind"] = "registry.entry", ["meta.type"] = "wippy.documentation.page"}))
+            local count = 0
+            for _, entry in ipairs(entries) do
+                local id = tostring(entry.id)
+                if id:match("^kickside%.docs:") then
+                    local data = entry.data
+                    test.is_true(expected[data.path] == true, id)
+                    test.is_nil(seen[data.path], data.path)
+                    seen[data.path] = true
+                    count = count + 1
+                    test.eq(id, "kickside.docs:pages." .. data.path:gsub("%.md$", ""):gsub("/", "."))
+                    local bytes = assert(storage:readfile(data.path))
+                    test.eq(data.content, bytes, data.path)
+                    local title = ("\n" .. bytes):match("\n# ([^\r\n]+)")
+                    test.not_nil(title, data.path)
+                    test.eq(data.title, title, data.path)
+                    test.eq(data.status, "stable", data.path)
+                    test.eq(data.document_kind, "guide", data.path)
+                end
+            end
+            test.eq(count, #paths)
+            for _, path in ipairs(paths) do test.is_true(seen[path] == true, path) end
+        end)
+
+        test.it("navigates to every module page exactly once without unknown references", function()
+            local _, paths = repository_pages()
+            local expected, seen = {}, {}
+            for _, path in ipairs(paths) do
+                expected["kickside.docs:pages." .. path:gsub("%.md$", ""):gsub("/", ".")] = true
+            end
+            local entries = assert(registry.find({[".kind"] = "registry.entry", ["meta.type"] = "wippy.documentation.navigation"}))
+            test.eq(#entries, 1)
+            test.eq(tostring(entries[1].id), "kickside.docs:navigation")
+            local count = 0
+            local function walk(items)
+                for _, item in ipairs(items) do
+                    if item.document then
+                        test.is_true(expected[item.document] == true, item.document)
+                        test.is_nil(seen[item.document], item.document)
+                        seen[item.document] = true
+                        count = count + 1
+                    end
+                    if item.items then walk(item.items) end
+                end
+            end
+            walk(entries[1].data.items)
+            test.eq(count, #paths)
+            for id in pairs(expected) do test.is_true(seen[id] == true, id) end
+        end)
+
         test.it("uses the configured database profile", function()
             local entry = assert(registry.get("app:db"))
             if entry.kind == "db.sql.sqlite" then
@@ -95,10 +128,7 @@ local function define_tests()
                 test.eq(row.title, bytes:match("^# ([^\r\n]+)"), path)
                 local section = path:match("^([^/]+)/") or ""
                 test.eq(row.section, section, path)
-                local kind = "guide"
-                if section == "building-modules" then kind = "handbook" end
-                if section == "reference" then kind = "reference" end
-                test.eq(row.document_kind, kind, path)
+                test.eq(row.document_kind, "guide", path)
                 test.eq(row.status, "stable", path)
             end
             for section, count in pairs(counts) do test.eq(result.sections[section], count, section) end
@@ -140,9 +170,9 @@ local function define_tests()
             for index, row in ipairs(all.pages) do test.eq(seen[index], row.path) end
         end)
 
-        test.it("reads exact Markdown bytes and titles in every section", function()
-            local storage = assert(fs.get("app:repository"))
-            for _, path in ipairs({"index.md", "getting-started/index.md", "using/index.md", "building-modules/index.md", "reference/index.md"}) do
+        test.it("reads exact Markdown bytes and titles for every repository page", function()
+            local storage, paths = repository_pages()
+            for _, path in ipairs(paths) do
                 local bytes = assert(storage:readfile(path))
                 local result, err = catalog.read({page = path})
                 test.is_nil(err)
@@ -196,7 +226,9 @@ local function define_tests()
             for name, result in pairs({list_docs_tool = listed, read_doc_tool = read}) do
                 local entry = assert(registry.get("kickside.docs.traits:" .. name))
                 local schema = assert(json.decode(entry.meta.output_schema))
-                matches_schema(result, schema)
+                local valid, validation_err = json.validate(schema, result)
+                test.is_nil(validation_err)
+                test.is_true(valid)
                 test.eq(entry.meta.public, true)
                 test.eq(entry.meta.mcp.required_scopes[1], "state.read")
                 test.eq(#entry.meta.mcp.required_scopes, 1)

@@ -48,7 +48,7 @@ jobs:
         working-directory: source
         run: |
           make -C module lockrefresh
-          make -C module lint test check
+          make -C module lint test
       - name: Check PostgreSQL
         working-directory: source
         run: |

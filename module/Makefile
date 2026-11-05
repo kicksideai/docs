@@ -1,4 +1,4 @@
-.PHONY: lint test check lockrefresh publish
+.PHONY: lint test lockrefresh publish
 
 lint:
 	cd test && wippy lint $(WIPPY_LINT_ARGS) --ns 'kickside.docs' --ns 'kickside.docs.*'
@@ -9,9 +9,6 @@ test:
 	if [ $$status -ne 0 ] || printf '%s\n' "$$output" | grep -qE 'FAILED|No tests found' || \
 		! printf '%s\n' "$$output" | grep -q 'PASSED' || \
 		! printf '%s\n' "$$output" | grep -qE '[1-9][0-9]* tests'; then exit 1; fi
-
-check:
-	python3 scripts/check_pages.py
 
 lockrefresh:
 	cd test && wippy update --src-dir .

@@ -1,4 +1,4 @@
-version: "1.0"
+version: '1.0'
 namespace: app
 entries:
   - name: definition
@@ -8,7 +8,7 @@ entries:
   - name: db
     kind: db.sql.sqlite
     foreign_keys: true
-    file: ":memory:"
+    file: ':memory:'
   - name: repository
     kind: fs.directory
     directory: ../..
@@ -35,10 +35,13 @@ entries:
       content: '# Extension documentation'
   - name: extension_read
     kind: security.policy
-    groups: [app:members]
+    groups:
+      - app:members
     policy:
       resources: app:foreign_page
-      actions: [registry.get, registry.find]
+      actions:
+        - registry.get
+        - registry.find
       effect: allow
   - name: docs_test
     kind: function.lua
@@ -47,7 +50,13 @@ entries:
       suite: docs_catalog
     source: file://src/catalog_test.lua
     method: run
-    modules: [registry, fs, security, funcs, json, sql]
+    modules:
+      - registry
+      - fs
+      - security
+      - funcs
+      - json
+      - sql
     imports:
       catalog: kickside.docs:catalog
       test: wippy.test:test
