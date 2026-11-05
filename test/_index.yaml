@@ -1,0 +1,53 @@
+version: "1.0"
+namespace: app
+entries:
+  - name: definition
+    kind: ns.definition
+    meta:
+      title: Documentation test harness
+  - name: db
+    kind: db.sql.sqlite
+    foreign_keys: true
+    file: "${sqlite_path}"
+  - name: repository
+    kind: fs.directory
+    directory: ..
+  - name: dep.wippy.test
+    kind: ns.dependency
+    component: wippy/test
+    version: '*'
+  - name: dep.kickside.docs
+    kind: ns.dependency
+    component: kickside/docs
+    version: '*'
+    parameters:
+      - name: kickside.docs.security:user_security_scope
+        value: app:members
+  - name: foreign_page
+    kind: registry.entry
+    meta:
+      type: wippy.documentation.page
+    data:
+      path: extensions/example.md
+      title: Extension documentation
+      document_kind: reference
+      status: stable
+      content: '# Extension documentation'
+  - name: extension_read
+    kind: security.policy
+    groups: [app:members]
+    policy:
+      resources: app:foreign_page
+      actions: [registry.get, registry.find]
+      effect: allow
+  - name: docs_test
+    kind: function.lua
+    meta:
+      type: test
+      suite: docs_catalog
+    source: file://src/catalog_test.lua
+    method: run
+    modules: [registry, fs, security, funcs, json]
+    imports:
+      catalog: kickside.docs:catalog
+      test: wippy.test:test

@@ -1,0 +1,17 @@
+organization: kickside
+module: docs
+type: plugin
+description: KickSide documentation pages and agent reading tools.
+repository: https://github.com/kicksideai/docs
+license: LicenseRef-KickSide-Community-1.0
+directories:
+  src: ./src
+keywords: [kickside, documentation, agents]
+exclude:
+  - "test/**"
+  - "test:**"
+  - ".wippy/**"
+  - ".wippy:**"
+  - "scripts/**"
+exclude_meta:
+  type: [test]

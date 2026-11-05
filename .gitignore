@@ -1,0 +1,6 @@
+.wippy/
+wippy.lock
+*.wapp
+.scratch/
+__pycache__/
+!test/wippy.lock
