@@ -1,6 +1,7 @@
 .wippy/
 wippy.lock
+*.runtime.lock
 *.wapp
 .scratch/
 __pycache__/
-!test/wippy.lock
+!module/test/wippy.lock

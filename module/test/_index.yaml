@@ -8,10 +8,10 @@ entries:
   - name: db
     kind: db.sql.sqlite
     foreign_keys: true
-    file: "${sqlite_path}"
+    file: ":memory:"
   - name: repository
     kind: fs.directory
-    directory: ..
+    directory: ../..
   - name: dep.wippy.test
     kind: ns.dependency
     component: wippy/test
@@ -47,7 +47,7 @@ entries:
       suite: docs_catalog
     source: file://src/catalog_test.lua
     method: run
-    modules: [registry, fs, security, funcs, json]
+    modules: [registry, fs, security, funcs, json, sql]
     imports:
       catalog: kickside.docs:catalog
       test: wippy.test:test

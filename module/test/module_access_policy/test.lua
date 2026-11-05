@@ -9,7 +9,7 @@ return {run = test.run_cases(function()
             test.eq(public.meta.intent, "module_access")
             test.eq(public.meta.surface, "kickside.docs")
             test.eq(private.meta.private, true)
-            test.eq(#public.data.policy.resources, 4)
+            test.eq(#public.data.policy.resources, 3)
             test.eq(#public.data.policy.resources, #private.data.policy.resources)
             test.eq(#public.data.policy.actions, #private.data.policy.actions)
             local actor = security.new_actor("policy-member", {})
@@ -20,7 +20,7 @@ return {run = test.run_cases(function()
             end
             for index, action in ipairs(public.data.policy.actions) do
                 test.eq(action, private.data.policy.actions[index])
-                for _, id in ipairs({"kickside.docs:catalog", "kickside.docs.pages:index", "kickside.docs.traits:docs_reader", "kickside.docs.security:module_access", "unrelated:entry"}) do
+                for _, id in ipairs({"kickside.docs:catalog", "kickside.docs:pages.index", "kickside.docs.traits:docs_reader", "kickside.docs.security:module_access", "unrelated:entry"}) do
                     test.eq(declared:evaluate(actor, action, id), runtime:evaluate(actor, action, id))
                     test.eq(declared:evaluate(actor, action, id), id == "unrelated:entry" and "undefined" or "allow")
                 end

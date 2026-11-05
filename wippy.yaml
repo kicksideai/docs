@@ -5,13 +5,15 @@ description: KickSide documentation pages and agent reading tools.
 repository: https://github.com/kicksideai/docs
 license: LicenseRef-KickSide-Community-1.0
 directories:
-  src: ./src
+  src: .
 keywords: [kickside, documentation, agents]
 exclude:
-  - "test/**"
-  - "test:**"
+  - "module/test/**"
+  - "module/test:**"
   - ".wippy/**"
   - ".wippy:**"
-  - "scripts/**"
+  - "app:**"
+  - "app.**:**"
+  - "*.wapp"
 exclude_meta:
-  type: [test]
+  type: [test, test_helper, test_support]

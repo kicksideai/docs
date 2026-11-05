@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "namespace": "kickside.docs.security",
+  "entries": [
+    {
+      "name": "user_security_scope",
+      "kind": "ns.requirement",
+      "meta": {
+        "value_kind": "security.scope",
+        "description": "Member security group with documentation access."
+      },
+      "default": "kickside.security.groups:members",
+      "targets": [
+        {
+          "entry": "kickside.docs.security:module_access",
+          "path": ".groups +="
+        },
+        {
+          "entry": "kickside.docs.security:module_runtime",
+          "path": ".groups +="
+        },
+        {
+          "entry": "kickside.docs.security:tool_access",
+          "path": ".groups +="
+        },
+        {
+          "entry": "kickside.docs.security:tool_runtime",
+          "path": ".groups +="
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,34 @@
 {
   "version": "1.0",
-  "namespace": "kickside.docs.pages",
+  "namespace": "kickside.docs",
   "entries": [
     {
-      "name": "building-modules.agents-skills-models",
+      "name": "definition",
+      "kind": "ns.definition",
+      "meta": {
+        "title": "KickSide Documentation"
+      },
+      "readme": "file://README.md"
+    },
+    {
+      "name": "dep.kickside.contract",
+      "kind": "ns.dependency",
+      "component": "kickside/contract",
+      "version": "*"
+    },
+    {
+      "name": "catalog",
+      "kind": "library.lua",
+      "source": "file://module/src/catalog.lua",
+      "modules": [
+        "registry"
+      ],
+      "imports": {
+        "keyset": "kickside.contract:keyset"
+      }
+    },
+    {
+      "name": "pages.building-modules.agents-skills-models",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -13,11 +38,11 @@
         "title": "Agents, skills, and models",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/agents-skills-models.md"
+        "content": "file://building-modules/agents-skills-models.md"
       }
     },
     {
-      "name": "building-modules.application-patterns",
+      "name": "pages.building-modules.application-patterns",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -27,11 +52,11 @@
         "title": "Application patterns",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/application-patterns.md"
+        "content": "file://building-modules/application-patterns.md"
       }
     },
     {
-      "name": "building-modules.automations-and-dataflows",
+      "name": "pages.building-modules.automations-and-dataflows",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -41,11 +66,11 @@
         "title": "Automations and dataflows",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/automations-and-dataflows.md"
+        "content": "file://building-modules/automations-and-dataflows.md"
       }
     },
     {
-      "name": "building-modules.blocks-flows-workflows",
+      "name": "pages.building-modules.blocks-flows-workflows",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -55,11 +80,11 @@
         "title": "Blocks, Flows, Workflows, and ports",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/blocks-flows-workflows.md"
+        "content": "file://building-modules/blocks-flows-workflows.md"
       }
     },
     {
-      "name": "building-modules.canonical-model",
+      "name": "pages.building-modules.canonical-model",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -69,11 +94,11 @@
         "title": "Canonical model",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/canonical-model.md"
+        "content": "file://building-modules/canonical-model.md"
       }
     },
     {
-      "name": "building-modules.checklists",
+      "name": "pages.building-modules.checklists",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -83,11 +108,11 @@
         "title": "Module review checklist",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/checklists.md"
+        "content": "file://building-modules/checklists.md"
       }
     },
     {
-      "name": "building-modules.component-development",
+      "name": "pages.building-modules.component-development",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -97,11 +122,11 @@
         "title": "Components",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/component-development.md"
+        "content": "file://building-modules/component-development.md"
       }
     },
     {
-      "name": "building-modules.connections-and-integrations",
+      "name": "pages.building-modules.connections-and-integrations",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -111,11 +136,11 @@
         "title": "Connections and integrations",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/connections-and-integrations.md"
+        "content": "file://building-modules/connections-and-integrations.md"
       }
     },
     {
-      "name": "building-modules.contracts-and-ports",
+      "name": "pages.building-modules.contracts-and-ports",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -125,11 +150,11 @@
         "title": "Contracts and ports",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/contracts-and-ports.md"
+        "content": "file://building-modules/contracts-and-ports.md"
       }
     },
     {
-      "name": "building-modules.conventions",
+      "name": "pages.building-modules.conventions",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -139,11 +164,11 @@
         "title": "Registry and source conventions",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/conventions.md"
+        "content": "file://building-modules/conventions.md"
       }
     },
     {
-      "name": "building-modules.deals-crm",
+      "name": "pages.building-modules.deals-crm",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -153,11 +178,11 @@
         "title": "Compose a CRM application",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/deals-crm.md"
+        "content": "file://building-modules/deals-crm.md"
       }
     },
     {
-      "name": "building-modules.dev-loop",
+      "name": "pages.building-modules.dev-loop",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -167,11 +192,11 @@
         "title": "Development loop",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/dev-loop.md"
+        "content": "file://building-modules/dev-loop.md"
       }
     },
     {
-      "name": "building-modules.discovery-addressing-and-context",
+      "name": "pages.building-modules.discovery-addressing-and-context",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -181,11 +206,11 @@
         "title": "Discovery, addressing, and context",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/discovery-addressing-and-context.md"
+        "content": "file://building-modules/discovery-addressing-and-context.md"
       }
     },
     {
-      "name": "building-modules.execution-identity-and-jobs",
+      "name": "pages.building-modules.execution-identity-and-jobs",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -195,11 +220,11 @@
         "title": "Execution identity and jobs",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/execution-identity-and-jobs.md"
+        "content": "file://building-modules/execution-identity-and-jobs.md"
       }
     },
     {
-      "name": "building-modules.frontend",
+      "name": "pages.building-modules.frontend",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -209,11 +234,11 @@
         "title": "Frontend and web components",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/frontend.md"
+        "content": "file://building-modules/frontend.md"
       }
     },
     {
-      "name": "building-modules.index",
+      "name": "pages.building-modules.index",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -223,11 +248,11 @@
         "title": "Build a module",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/index.md"
+        "content": "file://building-modules/index.md"
       }
     },
     {
-      "name": "building-modules.knowledge-uploads-automation-inbox",
+      "name": "pages.building-modules.knowledge-uploads-automation-inbox",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -237,11 +262,11 @@
         "title": "Knowledge, uploads, and Inbox",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/knowledge-uploads-automation-inbox.md"
+        "content": "file://building-modules/knowledge-uploads-automation-inbox.md"
       }
     },
     {
-      "name": "building-modules.module-layout",
+      "name": "pages.building-modules.module-layout",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -251,11 +276,11 @@
         "title": "Module layout",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/module-layout.md"
+        "content": "file://building-modules/module-layout.md"
       }
     },
     {
-      "name": "building-modules.publishing",
+      "name": "pages.building-modules.publishing",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -265,11 +290,11 @@
         "title": "Packaging and installation",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/publishing.md"
+        "content": "file://building-modules/publishing.md"
       }
     },
     {
-      "name": "building-modules.recipes",
+      "name": "pages.building-modules.recipes",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -279,11 +304,11 @@
         "title": "Extension recipes",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/recipes.md"
+        "content": "file://building-modules/recipes.md"
       }
     },
     {
-      "name": "building-modules.security-and-module-access",
+      "name": "pages.building-modules.security-and-module-access",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -293,11 +318,11 @@
         "title": "Security and module access",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/security-and-module-access.md"
+        "content": "file://building-modules/security-and-module-access.md"
       }
     },
     {
-      "name": "building-modules.settings",
+      "name": "pages.building-modules.settings",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -307,11 +332,11 @@
         "title": "Settings declarations",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/settings.md"
+        "content": "file://building-modules/settings.md"
       }
     },
     {
-      "name": "building-modules.testing",
+      "name": "pages.building-modules.testing",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -321,11 +346,11 @@
         "title": "Testing and migrations",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/testing.md"
+        "content": "file://building-modules/testing.md"
       }
     },
     {
-      "name": "building-modules.threads-events-projections",
+      "name": "pages.building-modules.threads-events-projections",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -335,11 +360,11 @@
         "title": "Threads, events, and projections",
         "document_kind": "handbook",
         "status": "stable",
-        "content": "file://../../building-modules/threads-events-projections.md"
+        "content": "file://building-modules/threads-events-projections.md"
       }
     },
     {
-      "name": "getting-started.first-agent",
+      "name": "pages.getting-started.first-agent",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -349,11 +374,11 @@
         "title": "Create your first agent",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../getting-started/first-agent.md"
+        "content": "file://getting-started/first-agent.md"
       }
     },
     {
-      "name": "getting-started.first-connection",
+      "name": "pages.getting-started.first-connection",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -363,11 +388,11 @@
         "title": "Connect a provider",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../getting-started/first-connection.md"
+        "content": "file://getting-started/first-connection.md"
       }
     },
     {
-      "name": "getting-started.first-module",
+      "name": "pages.getting-started.first-module",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -377,11 +402,11 @@
         "title": "Install a module",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../getting-started/first-module.md"
+        "content": "file://getting-started/first-module.md"
       }
     },
     {
-      "name": "getting-started.index",
+      "name": "pages.getting-started.index",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -391,11 +416,11 @@
         "title": "Install and sign in",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../getting-started/index.md"
+        "content": "file://getting-started/index.md"
       }
     },
     {
-      "name": "index",
+      "name": "pages.index",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -405,11 +430,11 @@
         "title": "KickSide documentation",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../index.md"
+        "content": "file://index.md"
       }
     },
     {
-      "name": "reference.documentation-catalog",
+      "name": "pages.reference.documentation-catalog",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -419,11 +444,11 @@
         "title": "Registry documentation catalog",
         "document_kind": "reference",
         "status": "stable",
-        "content": "file://../../reference/documentation-catalog.md"
+        "content": "file://reference/documentation-catalog.md"
       }
     },
     {
-      "name": "reference.glossary",
+      "name": "pages.reference.glossary",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -433,11 +458,11 @@
         "title": "Glossary",
         "document_kind": "reference",
         "status": "stable",
-        "content": "file://../../reference/glossary.md"
+        "content": "file://reference/glossary.md"
       }
     },
     {
-      "name": "reference.index",
+      "name": "pages.reference.index",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -447,11 +472,11 @@
         "title": "Reference",
         "document_kind": "reference",
         "status": "stable",
-        "content": "file://../../reference/index.md"
+        "content": "file://reference/index.md"
       }
     },
     {
-      "name": "reference.modules",
+      "name": "pages.reference.modules",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -461,11 +486,11 @@
         "title": "Module catalog",
         "document_kind": "reference",
         "status": "stable",
-        "content": "file://../../reference/modules.md"
+        "content": "file://reference/modules.md"
       }
     },
     {
-      "name": "reference.security",
+      "name": "pages.reference.security",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -475,11 +500,11 @@
         "title": "Security and endpoint access",
         "document_kind": "reference",
         "status": "stable",
-        "content": "file://../../reference/security.md"
+        "content": "file://reference/security.md"
       }
     },
     {
-      "name": "using.agents",
+      "name": "pages.using.agents",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -489,11 +514,11 @@
         "title": "Agents",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/agents.md"
+        "content": "file://using/agents.md"
       }
     },
     {
-      "name": "using.appearance",
+      "name": "pages.using.appearance",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -503,11 +528,11 @@
         "title": "Appearance",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/appearance.md"
+        "content": "file://using/appearance.md"
       }
     },
     {
-      "name": "using.automations-and-workflows",
+      "name": "pages.using.automations-and-workflows",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -517,11 +542,11 @@
         "title": "Automations and workflows",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/automations-and-workflows.md"
+        "content": "file://using/automations-and-workflows.md"
       }
     },
     {
-      "name": "using.chat-and-artifacts",
+      "name": "pages.using.chat-and-artifacts",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -531,11 +556,11 @@
         "title": "Chat and artifacts",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/chat-and-artifacts.md"
+        "content": "file://using/chat-and-artifacts.md"
       }
     },
     {
-      "name": "using.chestor",
+      "name": "pages.using.chestor",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -545,11 +570,11 @@
         "title": "Chestor",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/chestor.md"
+        "content": "file://using/chestor.md"
       }
     },
     {
-      "name": "using.connections",
+      "name": "pages.using.connections",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -559,11 +584,11 @@
         "title": "Connections",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/connections.md"
+        "content": "file://using/connections.md"
       }
     },
     {
-      "name": "using.crm",
+      "name": "pages.using.crm",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -573,11 +598,11 @@
         "title": "CRM",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/crm.md"
+        "content": "file://using/crm.md"
       }
     },
     {
-      "name": "using.dashboard",
+      "name": "pages.using.dashboard",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -587,11 +612,11 @@
         "title": "Dashboard",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/dashboard.md"
+        "content": "file://using/dashboard.md"
       }
     },
     {
-      "name": "using.inbox",
+      "name": "pages.using.inbox",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -601,11 +626,11 @@
         "title": "Inbox",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/inbox.md"
+        "content": "file://using/inbox.md"
       }
     },
     {
-      "name": "using.index",
+      "name": "pages.using.index",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -615,11 +640,11 @@
         "title": "Using KickSide",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/index.md"
+        "content": "file://using/index.md"
       }
     },
     {
-      "name": "using.knowledge",
+      "name": "pages.using.knowledge",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -629,11 +654,11 @@
         "title": "Knowledge bases",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/knowledge.md"
+        "content": "file://using/knowledge.md"
       }
     },
     {
-      "name": "using.mcp",
+      "name": "pages.using.mcp",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -643,11 +668,11 @@
         "title": "MCP credentials",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/mcp.md"
+        "content": "file://using/mcp.md"
       }
     },
     {
-      "name": "using.modules",
+      "name": "pages.using.modules",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -657,11 +682,11 @@
         "title": "Modules and the Hub",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/modules.md"
+        "content": "file://using/modules.md"
       }
     },
     {
-      "name": "using.research",
+      "name": "pages.using.research",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -671,11 +696,11 @@
         "title": "Research",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/research.md"
+        "content": "file://using/research.md"
       }
     },
     {
-      "name": "using.settings",
+      "name": "pages.using.settings",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -685,11 +710,11 @@
         "title": "Settings",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/settings.md"
+        "content": "file://using/settings.md"
       }
     },
     {
-      "name": "using.uploads",
+      "name": "pages.using.uploads",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -699,11 +724,11 @@
         "title": "Uploads",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/uploads.md"
+        "content": "file://using/uploads.md"
       }
     },
     {
-      "name": "using.users",
+      "name": "pages.using.users",
       "kind": "registry.entry",
       "meta": {
         "type": "wippy.documentation.page"
@@ -713,7 +738,7 @@
         "title": "Users and groups",
         "document_kind": "guide",
         "status": "stable",
-        "content": "file://../../using/users.md"
+        "content": "file://using/users.md"
       }
     },
     {
@@ -726,26 +751,26 @@
         "items": [
           {
             "title": "Home",
-            "document": "kickside.docs.pages:index"
+            "document": "kickside.docs:pages.index"
           },
           {
             "title": "Getting started",
             "items": [
               {
                 "title": "Install and sign in",
-                "document": "kickside.docs.pages:getting-started.index"
+                "document": "kickside.docs:pages.getting-started.index"
               },
               {
                 "title": "Create your first agent",
-                "document": "kickside.docs.pages:getting-started.first-agent"
+                "document": "kickside.docs:pages.getting-started.first-agent"
               },
               {
                 "title": "Connect a provider",
-                "document": "kickside.docs.pages:getting-started.first-connection"
+                "document": "kickside.docs:pages.getting-started.first-connection"
               },
               {
                 "title": "Install a module",
-                "document": "kickside.docs.pages:getting-started.first-module"
+                "document": "kickside.docs:pages.getting-started.first-module"
               }
             ]
           },
@@ -754,71 +779,71 @@
             "items": [
               {
                 "title": "Using KickSide",
-                "document": "kickside.docs.pages:using.index"
+                "document": "kickside.docs:pages.using.index"
               },
               {
                 "title": "Agents",
-                "document": "kickside.docs.pages:using.agents"
+                "document": "kickside.docs:pages.using.agents"
               },
               {
                 "title": "Chat and artifacts",
-                "document": "kickside.docs.pages:using.chat-and-artifacts"
+                "document": "kickside.docs:pages.using.chat-and-artifacts"
               },
               {
                 "title": "Knowledge bases",
-                "document": "kickside.docs.pages:using.knowledge"
+                "document": "kickside.docs:pages.using.knowledge"
               },
               {
                 "title": "Uploads",
-                "document": "kickside.docs.pages:using.uploads"
+                "document": "kickside.docs:pages.using.uploads"
               },
               {
                 "title": "Connections",
-                "document": "kickside.docs.pages:using.connections"
+                "document": "kickside.docs:pages.using.connections"
               },
               {
                 "title": "MCP credentials",
-                "document": "kickside.docs.pages:using.mcp"
+                "document": "kickside.docs:pages.using.mcp"
               },
               {
                 "title": "Automations and workflows",
-                "document": "kickside.docs.pages:using.automations-and-workflows"
+                "document": "kickside.docs:pages.using.automations-and-workflows"
               },
               {
                 "title": "Inbox",
-                "document": "kickside.docs.pages:using.inbox"
+                "document": "kickside.docs:pages.using.inbox"
               },
               {
                 "title": "CRM",
-                "document": "kickside.docs.pages:using.crm"
+                "document": "kickside.docs:pages.using.crm"
               },
               {
                 "title": "Chestor",
-                "document": "kickside.docs.pages:using.chestor"
+                "document": "kickside.docs:pages.using.chestor"
               },
               {
                 "title": "Dashboard",
-                "document": "kickside.docs.pages:using.dashboard"
+                "document": "kickside.docs:pages.using.dashboard"
               },
               {
                 "title": "Research",
-                "document": "kickside.docs.pages:using.research"
+                "document": "kickside.docs:pages.using.research"
               },
               {
                 "title": "Users and groups",
-                "document": "kickside.docs.pages:using.users"
+                "document": "kickside.docs:pages.using.users"
               },
               {
                 "title": "Modules and the Hub",
-                "document": "kickside.docs.pages:using.modules"
+                "document": "kickside.docs:pages.using.modules"
               },
               {
                 "title": "Appearance",
-                "document": "kickside.docs.pages:using.appearance"
+                "document": "kickside.docs:pages.using.appearance"
               },
               {
                 "title": "Settings",
-                "document": "kickside.docs.pages:using.settings"
+                "document": "kickside.docs:pages.using.settings"
               }
             ]
           },
@@ -827,99 +852,99 @@
             "items": [
               {
                 "title": "Build a module",
-                "document": "kickside.docs.pages:building-modules.index"
+                "document": "kickside.docs:pages.building-modules.index"
               },
               {
                 "title": "Canonical model",
-                "document": "kickside.docs.pages:building-modules.canonical-model"
+                "document": "kickside.docs:pages.building-modules.canonical-model"
               },
               {
                 "title": "Discovery, addressing, and context",
-                "document": "kickside.docs.pages:building-modules.discovery-addressing-and-context"
+                "document": "kickside.docs:pages.building-modules.discovery-addressing-and-context"
               },
               {
                 "title": "Module layout",
-                "document": "kickside.docs.pages:building-modules.module-layout"
+                "document": "kickside.docs:pages.building-modules.module-layout"
               },
               {
                 "title": "Components",
-                "document": "kickside.docs.pages:building-modules.component-development"
+                "document": "kickside.docs:pages.building-modules.component-development"
               },
               {
                 "title": "Contracts and ports",
-                "document": "kickside.docs.pages:building-modules.contracts-and-ports"
+                "document": "kickside.docs:pages.building-modules.contracts-and-ports"
               },
               {
                 "title": "Threads, events, and projections",
-                "document": "kickside.docs.pages:building-modules.threads-events-projections"
+                "document": "kickside.docs:pages.building-modules.threads-events-projections"
               },
               {
                 "title": "Connections and integrations",
-                "document": "kickside.docs.pages:building-modules.connections-and-integrations"
+                "document": "kickside.docs:pages.building-modules.connections-and-integrations"
               },
               {
                 "title": "Knowledge, uploads, and Inbox",
-                "document": "kickside.docs.pages:building-modules.knowledge-uploads-automation-inbox"
+                "document": "kickside.docs:pages.building-modules.knowledge-uploads-automation-inbox"
               },
               {
                 "title": "Agents, skills, and models",
-                "document": "kickside.docs.pages:building-modules.agents-skills-models"
+                "document": "kickside.docs:pages.building-modules.agents-skills-models"
               },
               {
                 "title": "Blocks, Flows, Workflows, and ports",
-                "document": "kickside.docs.pages:building-modules.blocks-flows-workflows"
+                "document": "kickside.docs:pages.building-modules.blocks-flows-workflows"
               },
               {
                 "title": "Automations and dataflows",
-                "document": "kickside.docs.pages:building-modules.automations-and-dataflows"
+                "document": "kickside.docs:pages.building-modules.automations-and-dataflows"
               },
               {
                 "title": "Execution identity and jobs",
-                "document": "kickside.docs.pages:building-modules.execution-identity-and-jobs"
+                "document": "kickside.docs:pages.building-modules.execution-identity-and-jobs"
               },
               {
                 "title": "Security and module access",
-                "document": "kickside.docs.pages:building-modules.security-and-module-access"
+                "document": "kickside.docs:pages.building-modules.security-and-module-access"
               },
               {
                 "title": "Settings declarations",
-                "document": "kickside.docs.pages:building-modules.settings"
+                "document": "kickside.docs:pages.building-modules.settings"
               },
               {
                 "title": "Frontend and web components",
-                "document": "kickside.docs.pages:building-modules.frontend"
+                "document": "kickside.docs:pages.building-modules.frontend"
               },
               {
                 "title": "Application patterns",
-                "document": "kickside.docs.pages:building-modules.application-patterns"
+                "document": "kickside.docs:pages.building-modules.application-patterns"
               },
               {
                 "title": "Extension recipes",
-                "document": "kickside.docs.pages:building-modules.recipes"
+                "document": "kickside.docs:pages.building-modules.recipes"
               },
               {
                 "title": "Compose a CRM application",
-                "document": "kickside.docs.pages:building-modules.deals-crm"
+                "document": "kickside.docs:pages.building-modules.deals-crm"
               },
               {
                 "title": "Registry and source conventions",
-                "document": "kickside.docs.pages:building-modules.conventions"
+                "document": "kickside.docs:pages.building-modules.conventions"
               },
               {
                 "title": "Development loop",
-                "document": "kickside.docs.pages:building-modules.dev-loop"
+                "document": "kickside.docs:pages.building-modules.dev-loop"
               },
               {
                 "title": "Testing and migrations",
-                "document": "kickside.docs.pages:building-modules.testing"
+                "document": "kickside.docs:pages.building-modules.testing"
               },
               {
                 "title": "Packaging and installation",
-                "document": "kickside.docs.pages:building-modules.publishing"
+                "document": "kickside.docs:pages.building-modules.publishing"
               },
               {
                 "title": "Module review checklist",
-                "document": "kickside.docs.pages:building-modules.checklists"
+                "document": "kickside.docs:pages.building-modules.checklists"
               }
             ]
           },
@@ -928,23 +953,23 @@
             "items": [
               {
                 "title": "Reference",
-                "document": "kickside.docs.pages:reference.index"
+                "document": "kickside.docs:pages.reference.index"
               },
               {
                 "title": "Module catalog",
-                "document": "kickside.docs.pages:reference.modules"
+                "document": "kickside.docs:pages.reference.modules"
               },
               {
                 "title": "Security and endpoint access",
-                "document": "kickside.docs.pages:reference.security"
+                "document": "kickside.docs:pages.reference.security"
               },
               {
                 "title": "Glossary",
-                "document": "kickside.docs.pages:reference.glossary"
+                "document": "kickside.docs:pages.reference.glossary"
               },
               {
                 "title": "Registry documentation catalog",
-                "document": "kickside.docs.pages:reference.documentation-catalog"
+                "document": "kickside.docs:pages.reference.documentation-catalog"
               }
             ]
           }

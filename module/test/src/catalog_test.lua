@@ -5,13 +5,14 @@ local fs = require("fs")
 local funcs = require("funcs")
 local security = require("security")
 local json = require("json")
+local sql = require("sql")
 
 local function repository_pages()
     local storage = assert(fs.get("app:repository"))
     local paths = {"index.md"}
     for _, section in ipairs({"getting-started", "using", "building-modules", "reference"}) do
         local iter, state = storage:readdir(section)
-        assert(iter, tostring(state))
+        if not iter then error(state) end
         for item in iter, state do
             if item.name:match("%.md$") then paths[#paths + 1] = section .. "/" .. item.name end
         end
@@ -20,23 +21,63 @@ local function repository_pages()
     return storage, paths
 end
 
-local function member()
+local function member(include_tools)
     local entries = assert(registry.find({[".kind"] = "security.policy"}))
     local policies = {}
     for _, entry in ipairs(entries) do
         for _, group in ipairs(entry.data.groups or {}) do
-            if tostring(group) == "app:members" then
+            if tostring(group) == "app:members" and
+                (include_tools ~= false or not tostring(entry.id):match(":tool_")) then
                 policies[#policies + 1] = assert(security.policy(tostring(entry.id)))
             end
         end
     end
-    test.eq(#policies, 5)
+    test.eq(#policies, include_tools == false and 3 or 5)
     return funcs.new():with_actor(security.new_actor("docs-member", {}))
         :with_scope(assert(security.new_scope(policies)))
 end
 
+local function matches_schema(value, schema)
+    if schema.type == "object" or schema.type == "array" then
+        test.eq(type(value), "table")
+    elseif schema.type == "integer" then
+        test.eq(type(value), "number")
+        test.eq(value, math.floor(value))
+    else
+        test.eq(type(value), schema.type)
+    end
+    if schema.const ~= nil then test.eq(value, schema.const) end
+    if schema.minimum ~= nil then test.is_true(value >= schema.minimum) end
+    if schema.type == "object" then
+        for _, key in ipairs(schema.required or {}) do test.not_nil(value[key], key) end
+        for key, child in pairs(value) do
+            local property = schema.properties and schema.properties[key]
+            if property then matches_schema(child, property)
+            elseif schema.additionalProperties == false then test.fail("unexpected property: " .. key)
+            elseif type(schema.additionalProperties) == "table" then matches_schema(child, schema.additionalProperties) end
+        end
+    elseif schema.type == "array" then
+        for _, child in ipairs(value) do matches_schema(child, schema.items) end
+    end
+end
+
 local function define_tests()
     test.describe("documentation catalog", function()
+        test.it("uses the configured database profile", function()
+            local entry = assert(registry.get("app:db"))
+            if entry.kind == "db.sql.sqlite" then
+                test.eq(entry.data.file, ":memory:")
+            else
+                test.eq(entry.kind, "db.sql.postgres")
+            end
+            local db = assert(sql.get("app:db"))
+            local rows, err = db:query("SELECT 1 AS value")
+            local _, release_err = db:release()
+            test.is_nil(err)
+            test.is_nil(release_err)
+            test.eq(rows[1].value, 1)
+        end)
+
         test.it("lists every repository page with its metadata and section counts", function()
             local storage, paths = repository_pages()
             local result, err = catalog.list({limit = 100})
@@ -137,6 +178,10 @@ local function define_tests()
             test.eq(listed.success, true)
             test.eq(listed.count, #listed.pages)
             test.eq(listed.sections.extensions, 1)
+            local first = assert(exec:call("kickside.docs.traits:list_docs_tool", {limit = 2}))
+            local second = assert(exec:call("kickside.docs.traits:list_docs_tool", {limit = 2, cursor = first.next_cursor}))
+            test.eq(second.sections.extensions, 1)
+            test.is_true(second.pages[1].path > first.pages[2].path)
             local found = false
             for _, row in ipairs(listed.pages) do
                 if row.path == "extensions/example.md" then found = true end
@@ -151,14 +196,7 @@ local function define_tests()
             for name, result in pairs({list_docs_tool = listed, read_doc_tool = read}) do
                 local entry = assert(registry.get("kickside.docs.traits:" .. name))
                 local schema = assert(json.decode(entry.meta.output_schema))
-                for _, key in ipairs(schema.required) do test.not_nil(result[key], key) end
-                for key, value in pairs(result) do
-                    test.not_nil(schema.properties[key], key)
-                    local kind = schema.properties[key].type
-                    if kind == "integer" then test.eq(value, math.floor(value))
-                    elseif kind == "object" or kind == "array" then test.eq(type(value), "table")
-                    else test.eq(type(value), kind) end
-                end
+                matches_schema(result, schema)
                 test.eq(entry.meta.public, true)
                 test.eq(entry.meta.mcp.required_scopes[1], "state.read")
                 test.eq(#entry.meta.mcp.required_scopes, 1)
@@ -169,6 +207,15 @@ local function define_tests()
                 test.is_true(errors.is(call_err, type(args.page) == "string" and errors.NOT_FOUND or errors.INVALID))
             end
         end)
+        test.it("requires tool access in addition to module access", function()
+            local exec = member(false)
+            for _, name in ipairs({"list_docs_tool", "read_doc_tool"}) do
+                local value, err = exec:call("kickside.docs.traits:" .. name, {page = "index.md"})
+                test.is_nil(value)
+                test.is_true(errors.is(err, errors.PERMISSION_DENIED))
+            end
+        end)
+
     end)
 end
 return {run = test.run_cases(define_tests)}

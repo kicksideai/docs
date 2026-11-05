@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "namespace": "kickside.docs.traits",
+  "entries": [
+    {
+      "name": "docs_reader",
+      "kind": "registry.entry",
+      "meta": {
+        "type": "agent.trait",
+        "title": "Documentation",
+        "public": true,
+        "icon": "tabler:book",
+        "tags": [
+          "documentation",
+          "kickside",
+          "reference"
+        ],
+        "comment": "Reads KickSide documentation through the page catalog."
+      },
+      "prompt": "Use ListDocs first to find documentation, then call ReadDoc with the exact page path returned by ListDocs. ListDocs includes section counts and supports section filters and cursor paging.",
+      "tools": [
+        "kickside.docs.traits:list_docs_tool",
+        "kickside.docs.traits:read_doc_tool"
+      ]
+    },
+    {
+      "name": "list_docs_tool",
+      "kind": "function.lua",
+      "meta": {
+        "type": "tool",
+        "public": true,
+        "title": "List documentation",
+        "llm_alias": "ListDocs",
+        "llm_description": "List visible documentation pages by path, optionally filtered by section; every response includes section counts.",
+        "mcp": {
+          "required_scopes": [
+            "state.read"
+          ]
+        },
+        "input_schema": "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"section\": {\n      \"type\": \"string\",\n      \"description\": \"Exact section from the sections summary; empty string selects root pages.\"\n    },\n    \"limit\": {\n      \"type\": \"integer\",\n      \"minimum\": 1,\n      \"maximum\": 100,\n      \"description\": \"Pages per response; default 25.\"\n    },\n    \"cursor\": {\n      \"type\": \"string\",\n      \"minLength\": 1,\n      \"description\": \"next_cursor from the previous response.\"\n    }\n  }\n}",
+        "output_schema": "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"success\",\n    \"count\",\n    \"pages\",\n    \"sections\"\n  ],\n  \"properties\": {\n    \"success\": {\n      \"type\": \"boolean\",\n      \"const\": true\n    },\n    \"count\": {\n      \"type\": \"integer\",\n      \"minimum\": 0\n    },\n    \"pages\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": false,\n        \"required\": [\n          \"path\",\n          \"title\",\n          \"section\",\n          \"document_kind\",\n          \"status\"\n        ],\n        \"properties\": {\n          \"path\": {\n            \"type\": \"string\"\n          },\n          \"title\": {\n            \"type\": \"string\"\n          },\n          \"section\": {\n            \"type\": \"string\"\n          },\n          \"document_kind\": {\n            \"type\": \"string\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    \"sections\": {\n      \"type\": \"object\",\n      \"additionalProperties\": {\n        \"type\": \"integer\",\n        \"minimum\": 1\n      }\n    },\n    \"next_cursor\": {\n      \"type\": \"string\"\n    }\n  }\n}"
+      },
+      "source": "file://list_docs_tool.lua",
+      "method": "handler",
+      "modules": [
+        "security"
+      ],
+      "imports": {
+        "catalog": "kickside.docs:catalog"
+      }
+    },
+    {
+      "name": "read_doc_tool",
+      "kind": "function.lua",
+      "meta": {
+        "type": "tool",
+        "public": true,
+        "title": "Read documentation",
+        "llm_alias": "ReadDoc",
+        "llm_description": "Read the full Markdown content at an exact page path returned by ListDocs.",
+        "mcp": {
+          "required_scopes": [
+            "state.read"
+          ]
+        },
+        "input_schema": "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"page\"\n  ],\n  \"properties\": {\n    \"page\": {\n      \"type\": \"string\",\n      \"description\": \"Exact path returned by ListDocs.\"\n    }\n  }\n}",
+        "output_schema": "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\n    \"success\",\n    \"page\",\n    \"title\",\n    \"section\",\n    \"content\"\n  ],\n  \"properties\": {\n    \"success\": {\n      \"type\": \"boolean\",\n      \"const\": true\n    },\n    \"page\": {\n      \"type\": \"string\"\n    },\n    \"title\": {\n      \"type\": \"string\"\n    },\n    \"section\": {\n      \"type\": \"string\"\n    },\n    \"content\": {\n      \"type\": \"string\"\n    }\n  }\n}"
+      },
+      "source": "file://read_doc_tool.lua",
+      "method": "handler",
+      "modules": [
+        "security"
+      ],
+      "imports": {
+        "catalog": "kickside.docs:catalog"
+      }
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 version: "1.0"
+override:
+  "app:db:file": "${sqlite_path}"
 workspace:
   replacements:
-    kickside/docs: ..
-    kickside/contract: ../../kickside/core/contract
+    kickside/docs: ../..
+    kickside/contract: ../../../kickside/core/contract
 vars:
   sqlite_path: ":memory:"
   pg_host: 127.0.0.1
