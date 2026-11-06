@@ -17,3 +17,12 @@ Shared brand images live in `getting-started/assets/brand/`. Product screenshots
 ![KickSide documentation home](https://raw.githubusercontent.com/kicksideai/docs/main/using/assets/docs/site.png)
 
 [Documentation](https://github.com/kicksideai/docs) · [KickSide](https://kickside.ai)
+
+## Module
+
+The `kickside/docs` plugin ships these Markdown pages as registry documentation,
+with a Documentation agent trait. `ListDocs` lists visible pages with section
+counts and cursor paging; `ReadDoc` reads the Markdown at an exact page path.
+
+With Wippy installed, run `make -C module lockrefresh` to resolve dependencies,
+then `make -C module lint test` to validate the module and page catalog.

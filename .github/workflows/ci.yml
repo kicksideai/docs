@@ -1,0 +1,38 @@
+name: CI
+'on':
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  module:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          path: source
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: kicksideai/kickside
+          ref: main
+          path: kickside
+          persist-credentials: false
+      - uses: kicksideai/.github/actions/setup-wippy@5401fa65bed7d8648125957520e94206ed1ffd0b
+        with:
+          version: 0.3.56a
+          hub-url: https://hub.wippy.ai
+      - name: Resolve dependencies, lint, and test
+        working-directory: source
+        run: |
+          make -C module lockrefresh
+          make -C module lint test

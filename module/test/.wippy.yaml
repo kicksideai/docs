@@ -1,0 +1,12 @@
+version: "1.0"
+workspace:
+  replacements:
+    kickside/docs: ../..
+    kickside/contract: ../../../kickside/core/contract
+registry:
+  dispatch_internal_kinds:
+    - registry.entry
+    - ns.requirement
+    - ns.dependency
+    - ns.definition
+    - security.scope

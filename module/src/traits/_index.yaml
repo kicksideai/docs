@@ -1,0 +1,183 @@
+version: '1.0'
+namespace: kickside.docs.traits
+entries:
+  - name: docs_reader
+    kind: registry.entry
+    meta:
+      type: agent.trait
+      title: Documentation
+      public: true
+      icon: tabler:book
+      tags:
+        - documentation
+        - kickside
+        - reference
+      comment: Reads KickSide documentation through the page catalog.
+    prompt: Use ListDocs first to find documentation, then call ReadDoc with the exact page path returned
+      by ListDocs. ListDocs includes section counts and supports section filters and cursor paging.
+    tools:
+      - kickside.docs.traits:list_docs_tool
+      - kickside.docs.traits:read_doc_tool
+  - name: list_docs_tool
+    kind: function.lua
+    meta:
+      type: tool
+      public: true
+      title: List documentation
+      llm_alias: ListDocs
+      llm_description: List visible documentation pages by path, optionally filtered by section; every
+        response includes section counts.
+      mcp:
+        required_scopes:
+          - state.read
+      input_schema: |
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "section": {
+              "type": "string",
+              "description": "Exact section from the sections summary; empty string selects root pages."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "description": "Pages per response; default 25."
+            },
+            "cursor": {
+              "type": "string",
+              "minLength": 1,
+              "description": "next_cursor from the previous response."
+            }
+          }
+        }
+      output_schema: |
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "success",
+            "count",
+            "pages",
+            "sections"
+          ],
+          "properties": {
+            "success": {
+              "type": "boolean",
+              "const": true
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "pages": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "path",
+                  "title",
+                  "section",
+                  "document_kind",
+                  "status"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "section": {
+                    "type": "string"
+                  },
+                  "document_kind": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "sections": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "next_cursor": {
+              "type": "string"
+            }
+          }
+        }
+    source: file://list_docs_tool.lua
+    method: handler
+    modules:
+      - security
+    imports:
+      catalog: kickside.docs:catalog
+  - name: read_doc_tool
+    kind: function.lua
+    meta:
+      type: tool
+      public: true
+      title: Read documentation
+      llm_alias: ReadDoc
+      llm_description: Read the full Markdown content at an exact page path returned by ListDocs.
+      mcp:
+        required_scopes:
+          - state.read
+      input_schema: |
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "page"
+          ],
+          "properties": {
+            "page": {
+              "type": "string",
+              "description": "Exact path returned by ListDocs."
+            }
+          }
+        }
+      output_schema: |
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "success",
+            "page",
+            "title",
+            "section",
+            "content"
+          ],
+          "properties": {
+            "success": {
+              "type": "boolean",
+              "const": true
+            },
+            "page": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "section": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          }
+        }
+    source: file://read_doc_tool.lua
+    method: handler
+    modules:
+      - security
+    imports:
+      catalog: kickside.docs:catalog

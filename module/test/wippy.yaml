@@ -1,0 +1,9 @@
+organization: kickside
+module: docs-harness
+type: application
+description: Standalone harness for kickside/docs.
+directories:
+  src: .
+  modules: .wippy
+options:
+  unpack_modules: true
