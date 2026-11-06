@@ -12,4 +12,4 @@ Share a base with users or groups through its share control. The agent's executi
 
 Uploaded files and integration sources feed knowledge through supported ingestion and automation paths. Engine-specific configuration, views, and model requirements follow the selected engine.
 
-See [uploads](uploads.md), [automations](automations-and-workflows.md), and [resource access](users.md).
+See [uploads](uploads.md), [automations](automations-and-workflows.md), and [resource access](accounts.md).
