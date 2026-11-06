@@ -23,12 +23,8 @@ local function repository_pages()
     return storage, paths
 end
 
-local function member(include_tools)
+local function member()
     local scope = assert(security.named_scope("app:members"))
-    local selection = assert(registry.get(include_tools == false and "app:members" or "app:tools_selected"))
-    for _, id in ipairs(selection.data.policies) do
-        scope = scope:with(assert(security.policy(id)))
-    end
     return funcs.new():with_actor(security.new_actor("docs-member", {})):with_scope(scope)
 end
 
@@ -178,7 +174,7 @@ local function define_tests()
             end
         end)
 
-        test.it("calls both tools as a member and matches their declared result shapes", function()
+        test.it("calls both tools as a member by default and matches their declared result shapes", function()
             local exec = member()
             local listed, err = exec:call("kickside.docs.traits:list_docs_tool", {limit = 100})
             test.is_nil(err)
@@ -217,25 +213,16 @@ local function define_tests()
                 test.is_true(errors.is(call_err, type(args.page) == "string" and errors.NOT_FOUND or errors.INVALID))
             end
         end)
-        test.it("removes tool access when an installed scope unselects tools", function()
-            local original = assert(registry.current_version())
-            local changes = assert(registry.snapshot()):changes()
-            changes:update({id = "app:tools_selected", kind = "security.scope",
-                data = {groups = {"app:members"}, policies = {}}})
-            assert(changes:apply())
-            local ok, failure = pcall(function()
-                local exec = member()
-                for _, name in ipairs({"list_docs_tool", "read_doc_tool"}) do
-                    local value, err = exec:call("kickside.docs.traits:" .. name, {page = "index.md"})
-                    test.is_nil(value)
-                    test.is_true(errors.is(err, errors.PERMISSION_DENIED))
-                end
-            end)
-            test.is_true(assert(registry.apply_version(original)))
-            if not ok then error(failure) end
+        test.it("admits both tools through the installed member scope by default", function()
+            local scope = assert(security.named_scope("app:members"))
+            local actor = security.new_actor("docs-member", {})
+            for _, name in ipairs({"list_docs_tool", "read_doc_tool"}) do
+                test.eq(scope:evaluate(actor, "access", "kickside.docs.traits:" .. name), "allow")
+            end
         end)
-        test.it("requires tool access in addition to module access", function()
-            local exec = member(false)
+        test.it("denies both tools to a non-member", function()
+            local exec = funcs.new():with_actor(security.new_actor("docs-non-member", {}))
+                :with_scope(assert(security.new_scope({})))
             for _, name in ipairs({"list_docs_tool", "read_doc_tool"}) do
                 local value, err = exec:call("kickside.docs.traits:" .. name, {page = "index.md"})
                 test.is_nil(value)

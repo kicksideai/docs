@@ -12,3 +12,7 @@ entries:
         path: .groups +=
       - entry: kickside.docs.security:module_runtime
         path: .groups +=
+      - entry: kickside.docs.security:tool_access
+        path: .groups +=
+      - entry: kickside.docs.security:tool_runtime
+        path: .groups +=

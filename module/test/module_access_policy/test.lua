@@ -61,11 +61,11 @@ return {run = test.run_cases(function()
                 end
             end
         end)
-        test.it("binds only module policies to the member requirement", function()
+        test.it("binds module and tool policies to the member requirement", function()
             local requirement = assert(registry.get("kickside.docs.security:user_security_scope"))
             test.eq(requirement.meta.value_kind, "security.scope")
             test.eq(requirement.data.default, "kickside.security.groups:members")
-            test.eq(#requirement.data.targets, 2)
+            test.eq(#requirement.data.targets, 4)
             local seen = {}
             for _, target in ipairs(requirement.data.targets) do
                 test.eq(target.path, ".groups +=")
@@ -74,12 +74,8 @@ return {run = test.run_cases(function()
                 test.eq(#entry.data.groups, 1)
                 test.eq(entry.data.groups[1], "app:members")
             end
-            for _, name in ipairs({"module_access", "module_runtime"}) do
+            for _, name in ipairs({"module_access", "module_runtime", "tool_access", "tool_runtime"}) do
                 test.is_true(seen["kickside.docs.security:" .. name])
-            end
-            for _, name in ipairs({"tool_access", "tool_runtime"}) do
-                local entry = assert(registry.get("kickside.docs.security:" .. name))
-                test.eq(#entry.data.groups, 0)
             end
             local outsider = assert(security.new_scope({}))
             local actor = security.new_actor("outside-member-group", {})

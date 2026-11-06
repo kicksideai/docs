@@ -22,13 +22,6 @@ entries:
   - name: members
     kind: security.scope
     policies: []
-  - name: tools_selected
-    kind: security.scope
-    groups:
-      - app:members
-    policies:
-      - kickside.docs.security:tool_access
-      - kickside.docs.security:tool_runtime
   - name: foreign_page
     kind: registry.entry
     meta:
