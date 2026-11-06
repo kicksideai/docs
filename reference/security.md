@@ -483,6 +483,6 @@ for request/result schemas and operation-specific access checks.
 | [`chestor.workspace.api:grant_entry.endpoint`](https://github.com/kicksideai/chestor/blob/main/workspace/src/api/_index.yaml) | `POST` | `/workspace/entries/{id}/grant` | `chestor.workspace:api_router` |
 | [`chestor.workspace.api:revoke_entry.endpoint`](https://github.com/kicksideai/chestor/blob/main/workspace/src/api/_index.yaml) | `POST` | `/workspace/entries/{id}/revoke` | `chestor.workspace:api_router` |
 
-See [users and groups](../using/users.md) for configuration and
+See [users and groups](../using/accounts.md) for configuration and
 [module policy authoring](../building-modules/security-and-module-access.md)
 for requirements, delegation, and resource authority.
