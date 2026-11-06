@@ -517,16 +517,16 @@ entries:
       document_kind: guide
       status: stable
       content: file://using/uploads.md
-  - name: pages.using.accounts
+  - name: pages.using.users
     kind: registry.entry
     meta:
       type: wippy.documentation.page
     data:
-      path: using/accounts.md
+      path: using/users.md
       title: Users and groups
       document_kind: guide
       status: stable
-      content: file://using/accounts.md
+      content: file://using/users.md
   - name: navigation
     kind: registry.entry
     meta:
@@ -574,7 +574,7 @@ entries:
             - title: Research
               document: kickside.docs:pages.using.research
             - title: Users and groups
-              document: kickside.docs:pages.using.accounts
+              document: kickside.docs:pages.using.users
             - title: Modules and the Hub
               document: kickside.docs:pages.using.modules
             - title: Appearance
