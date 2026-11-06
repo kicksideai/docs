@@ -3,6 +3,7 @@ module: docs
 type: plugin
 description: KickSide documentation pages and agent reading tools.
 repository: https://github.com/kicksideai/docs
+homepage: https://wippy.ai
 license: LicenseRef-KickSide-Community-1.0
 directories:
   src: .
