@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.4](https://github.com/kicksideai/docs/compare/v0.1.3...v0.1.4) (2026-11-06)
+
+
+### Features
+
+* **docs:** ship documentation as the kickside/docs module ([#18](https://github.com/kicksideai/docs/issues/18)) ([b0dde40](https://github.com/kicksideai/docs/commit/b0dde404e94b934e11d4b7a3a3b21b5492ea0d05))
+
+
+### Documentation
+
+* **building-modules:** describe work after an upload is processed ([#17](https://github.com/kicksideai/docs/issues/17)) ([e9c1488](https://github.com/kicksideai/docs/commit/e9c1488f473d3a6f28ad337a1f5ec5e7fc989b89))
+
 ## [0.1.3](https://github.com/kicksideai/docs/compare/v0.1.2...v0.1.3) (2026-11-01)
 
 
