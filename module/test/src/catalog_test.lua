@@ -58,30 +58,11 @@ local function define_tests()
             for _, path in ipairs(paths) do test.is_true(seen[path] == true, path) end
         end)
 
-        test.it("navigates to every module page exactly once without unknown references", function()
-            local _, paths = repository_pages()
-            local expected, seen = {}, {}
-            for _, path in ipairs(paths) do
-                expected["kickside.docs:pages." .. path:gsub("%.md$", ""):gsub("/", ".")] = true
-            end
+        test.it("publishes pages without a navigation entry, which the host application owns", function()
             local entries = assert(registry.find({[".kind"] = "registry.entry", ["meta.type"] = "wippy.documentation.navigation"}))
-            test.eq(#entries, 1)
-            test.eq(tostring(entries[1].id), "kickside.docs:navigation")
-            local count = 0
-            local function walk(items)
-                for _, item in ipairs(items) do
-                    if item.document then
-                        test.is_true(expected[item.document] == true, item.document)
-                        test.is_nil(seen[item.document], item.document)
-                        seen[item.document] = true
-                        count = count + 1
-                    end
-                    if item.items then walk(item.items) end
-                end
+            for _, entry in ipairs(entries) do
+                test.is_false(tostring(entry.id):find("^kickside%.docs:") ~= nil, tostring(entry.id))
             end
-            walk(entries[1].data.items)
-            test.eq(count, #paths)
-            for id in pairs(expected) do test.is_true(seen[id] == true, id) end
         end)
 
         test.it("lists every repository page with its metadata and section counts", function()
