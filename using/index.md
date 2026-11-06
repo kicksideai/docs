@@ -11,7 +11,7 @@ Configure [agents](agents.md), start a [chat](chat-and-artifacts.md), and give t
 | Organize a workspace or inspect a graph | [Chestor](chestor.md) |
 | Research a question | [Research](research.md) |
 | Find installed features | [Dashboard](dashboard.md) |
-| Manage accounts and access | [Users and groups](accounts.md) |
+| Manage accounts and access | [Users and groups](users.md) |
 | Configure the installation in the app | [Modules](modules.md), [appearance](appearance.md), [settings](settings.md) |
 
 Optional features appear after their modules are installed. If a feature is absent, ask an administrator to check its package and your group access.
