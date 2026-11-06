@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.5](https://github.com/kicksideai/docs/compare/v0.1.4...v0.1.5) (2026-11-06)
+
+
+### Bug Fixes
+
+* **docs:** restore the users page at using/users.md ([#24](https://github.com/kicksideai/docs/issues/24)) ([6b7a139](https://github.com/kicksideai/docs/commit/6b7a1395fff0c806183e182a0216e35c513be762))
+* **docs:** use the accounts path for the users guide ([#23](https://github.com/kicksideai/docs/issues/23)) ([8d0bd09](https://github.com/kicksideai/docs/commit/8d0bd09e0bcdae96d60e45594f7ab8887ab2758c))
+* **module:** declare the module homepage ([#20](https://github.com/kicksideai/docs/issues/20)) ([66ad6b4](https://github.com/kicksideai/docs/commit/66ad6b4bac4e001200b1fa41fdd497e50382675f))
+
 ## [0.1.4](https://github.com/kicksideai/docs/compare/v0.1.3...v0.1.4) (2026-11-06)
 
 
