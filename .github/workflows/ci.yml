@@ -14,20 +14,7 @@ jobs:
   module:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_USER: kickside
-          POSTGRES_PASSWORD: kickside
-          POSTGRES_DB: postgres
-        ports: ['5433:5432']
-        options: --health-cmd "pg_isready -U kickside -d postgres" --health-interval 5s --health-timeout 5s --health-retries 10
     env:
-      PGHOST: 127.0.0.1
-      PGPORT: '5433'
-      PGUSER: kickside
-      PGPASSWORD: kickside
       PYTHONDONTWRITEBYTECODE: '1'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -44,15 +31,8 @@ jobs:
         with:
           version: 0.3.56a
           hub-url: https://hub.wippy.ai
-      - name: Resolve dependencies and check SQLite
+      - name: Resolve dependencies, lint, and test
         working-directory: source
         run: |
           make -C module lockrefresh
           make -C module lint test
-      - name: Check PostgreSQL
-        working-directory: source
-        run: |
-          set -euo pipefail
-          createdb kickside_docs_test
-          trap 'dropdb kickside_docs_test' EXIT
-          make -C module test WIPPY_TEST_ARGS='--profile postgres --set vars.pg_database=kickside_docs_test'

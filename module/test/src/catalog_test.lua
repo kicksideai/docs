@@ -5,7 +5,6 @@ local fs = require("fs")
 local funcs = require("funcs")
 local security = require("security")
 local json = require("json")
-local sql = require("sql")
 
 local function repository_pages()
     local storage = assert(fs.get("app:repository"))
@@ -25,19 +24,12 @@ local function repository_pages()
 end
 
 local function member(include_tools)
-    local entries = assert(registry.find({[".kind"] = "security.policy"}))
-    local policies = {}
-    for _, entry in ipairs(entries) do
-        for _, group in ipairs(entry.data.groups or {}) do
-            if tostring(group) == "app:members" and
-                (include_tools ~= false or not tostring(entry.id):match(":tool_")) then
-                policies[#policies + 1] = assert(security.policy(tostring(entry.id)))
-            end
-        end
+    local scope = assert(security.named_scope("app:members"))
+    local selection = assert(registry.get(include_tools == false and "app:members" or "app:tools_selected"))
+    for _, id in ipairs(selection.data.policies) do
+        scope = scope:with(assert(security.policy(id)))
     end
-    test.eq(#policies, include_tools == false and 3 or 5)
-    return funcs.new():with_actor(security.new_actor("docs-member", {}))
-        :with_scope(assert(security.new_scope(policies)))
+    return funcs.new():with_actor(security.new_actor("docs-member", {})):with_scope(scope)
 end
 
 local function define_tests()
@@ -94,21 +86,6 @@ local function define_tests()
             walk(entries[1].data.items)
             test.eq(count, #paths)
             for id in pairs(expected) do test.is_true(seen[id] == true, id) end
-        end)
-
-        test.it("uses the configured database profile", function()
-            local entry = assert(registry.get("app:db"))
-            if entry.kind == "db.sql.sqlite" then
-                test.eq(entry.data.file, ":memory:")
-            else
-                test.eq(entry.kind, "db.sql.postgres")
-            end
-            local db = assert(sql.get("app:db"))
-            local rows, err = db:query("SELECT 1 AS value")
-            local _, release_err = db:release()
-            test.is_nil(err)
-            test.is_nil(release_err)
-            test.eq(rows[1].value, 1)
         end)
 
         test.it("lists every repository page with its metadata and section counts", function()
@@ -238,6 +215,23 @@ local function define_tests()
                 test.is_nil(value)
                 test.is_true(errors.is(call_err, type(args.page) == "string" and errors.NOT_FOUND or errors.INVALID))
             end
+        end)
+        test.it("removes tool access when an installed scope unselects tools", function()
+            local original = assert(registry.current_version())
+            local changes = assert(registry.snapshot()):changes()
+            changes:update({id = "app:tools_selected", kind = "security.scope",
+                data = {groups = {"app:members"}, policies = {}}})
+            assert(changes:apply())
+            local ok, failure = pcall(function()
+                local exec = member()
+                for _, name in ipairs({"list_docs_tool", "read_doc_tool"}) do
+                    local value, err = exec:call("kickside.docs.traits:" .. name, {page = "index.md"})
+                    test.is_nil(value)
+                    test.is_true(errors.is(err, errors.PERMISSION_DENIED))
+                end
+            end)
+            test.is_true(assert(registry.apply_version(original)))
+            if not ok then error(failure) end
         end)
         test.it("requires tool access in addition to module access", function()
             local exec = member(false)

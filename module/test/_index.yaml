@@ -5,10 +5,6 @@ entries:
     kind: ns.definition
     meta:
       title: Documentation test harness
-  - name: db
-    kind: db.sql.sqlite
-    foreign_keys: true
-    file: ':memory:'
   - name: repository
     kind: fs.directory
     directory: ../..
@@ -23,6 +19,16 @@ entries:
     parameters:
       - name: kickside.docs.security:user_security_scope
         value: app:members
+  - name: members
+    kind: security.scope
+    policies: []
+  - name: tools_selected
+    kind: security.scope
+    groups:
+      - app:members
+    policies:
+      - kickside.docs.security:tool_access
+      - kickside.docs.security:tool_runtime
   - name: foreign_page
     kind: registry.entry
     meta:
@@ -56,7 +62,6 @@ entries:
       - security
       - funcs
       - json
-      - sql
     imports:
       catalog: kickside.docs:catalog
       test: wippy.test:test
