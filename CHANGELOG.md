@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/kicksideai/docs/compare/v0.1.5...v0.1.6) (2026-11-08)
+
+
+### Documentation
+
+* **reference:** synchronize the public module catalog ([#26](https://github.com/kicksideai/docs/issues/26)) ([112425d](https://github.com/kicksideai/docs/commit/112425d2911ca4de4513f270a81e81a90824d1b6))
+
 ## [0.1.5](https://github.com/kicksideai/docs/compare/v0.1.4...v0.1.5) (2026-11-06)
 
 
