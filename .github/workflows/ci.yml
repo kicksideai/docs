@@ -29,7 +29,7 @@ jobs:
           persist-credentials: false
       - uses: kicksideai/.github/actions/setup-wippy@5401fa65bed7d8648125957520e94206ed1ffd0b
         with:
-          version: 0.3.56a
+          version: 0.3.64a
           hub-url: https://hub.wippy.ai
       - name: Resolve dependencies, lint, and test
         working-directory: source
