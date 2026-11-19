@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.6](https://github.com/kicksideai/docs/compare/v0.1.5...v0.1.6) (2026-11-17)
+
+
+### Documentation
+
+* **building-modules:** preserve lazy component host and lifecycle contracts ([#25](https://github.com/kicksideai/docs/issues/25)) ([c590ca7](https://github.com/kicksideai/docs/commit/c590ca718f3fe94e4ba85308f90e229d8c6afc2a))
+* **reference:** synchronize the public module catalog ([#26](https://github.com/kicksideai/docs/issues/26)) ([112425d](https://github.com/kicksideai/docs/commit/112425d2911ca4de4513f270a81e81a90824d1b6))
+
 ## [0.1.5](https://github.com/kicksideai/docs/compare/v0.1.4...v0.1.5) (2026-11-06)
 
 
